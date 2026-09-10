@@ -40,9 +40,10 @@ the button straight at the matching installer:
 | Debian | `*.deb` |
 | Flatpak | `*.flatpak` |
 
-If the API is unreachable or rate limited, every button falls back to the
-GitHub releases page, which is also the plain `href` in the HTML. Nothing on
-the page depends on JavaScript except that upgrade.
+Before the API answers, and if it never does, the buttons use the release
+pinned in the `SHIPPED` constant at the top of `site.js`, so a visitor always
+gets a direct installer link rather than the releases page. Bump that constant
+when a release changes the asset filenames.
 
 The version shown in the nav and in the open-source panel is filled from the
 same release, so publishing a release is the only step needed to update it.

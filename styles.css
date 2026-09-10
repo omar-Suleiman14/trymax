@@ -235,9 +235,7 @@ section { position: relative; padding: 96px 0; border-top: 1px solid var(--borde
 .hero-source-link:hover .hero-source-arrow { opacity: 1; transform: translate(2px, -2px); }
 
 .hero-platform-line {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
+  display: block;
   color: var(--fg-dim);
   font-size: 13px;
   letter-spacing: -.005em;
@@ -545,6 +543,7 @@ html:not([data-platform]) .dl-icon--windows { display: block; }
 
 .open-pitch-footer { display: flex; flex-direction: column; gap: 18px; }
 .open-pitch-meta { display: flex; align-items: center; gap: 8px; color: var(--fg-dim); font-family: var(--font-mono); font-size: 11px; }
+.meta-sep { width: 1px; height: 10px; background: var(--border-strong); }
 .open-pitch-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
 
 .open-source-link { display: inline-flex; align-items: center; gap: 6px; color: var(--fg-muted); font-size: 13px; font-weight: 500; transition: color .18s; }

@@ -5,6 +5,18 @@
   const API_URL = `https://api.github.com/repos/${REPO}/releases/latest`;
   const CACHE_KEY = 'max:latest-release';
 
+  /* Shipped with the page so every button holds a direct installer link before
+     the API answers, and still holds one if it never does. Bump on release. */
+  const SHIPPED = {
+    tag_name: 'v0.4.3',
+    assets: [
+      'Max-0.4.3.Setup.exe',
+      'Max-darwin-arm64-0.4.3.zip',
+      'max-shop-os_0.4.3_amd64.deb',
+      'com.maxshop.Max_stable_x86_64.flatpak',
+    ].map((name) => ({ name, browser_download_url: `https://github.com/${REPO}/releases/download/v0.4.3/${name}` })),
+  };
+
   const PATTERNS = {
     windows: /\.exe$/i,
     mac: /(darwin|mac).*\.(zip|dmg)$/i,
@@ -81,18 +93,15 @@
       const match = findAsset(release, row.dataset.asset);
       const link = row.querySelector('[data-asset-link]');
       const meta = row.querySelector('[data-asset-meta]');
-      if (!match || !link) {
-        if (meta) meta.textContent = 'not published in this release';
-        return;
-      }
+      if (!match || !link) return;
       link.href = match.browser_download_url;
       link.setAttribute('download', '');
-      if (meta) meta.textContent = `${match.name} · ${formatSize(match.size)}`;
+      if (meta) meta.textContent = match.size ? `${match.name}, ${formatSize(match.size)}` : match.name;
     });
   };
 
-  const cached = readCache();
-  if (cached) apply(cached);
+  apply(SHIPPED);
+  apply(readCache());
 
   fetch(API_URL, { headers: { Accept: 'application/vnd.github+json' } })
     .then((response) => (response.ok ? response.json() : Promise.reject(new Error(String(response.status)))))
@@ -101,16 +110,14 @@
         tag_name: release.tag_name,
         assets: (release.assets ?? []).map(({ name, size, browser_download_url }) => ({ name, size, browser_download_url })),
       };
+      if (!trimmed.assets.length) return;
       writeCache(trimmed);
       apply(trimmed);
     })
     .catch(() => {
-      /* Rate limited or offline: the buttons already point at the releases page. */
-      document.querySelectorAll('[data-asset-meta]').forEach((meta) => {
-        if (!meta.textContent.trim()) meta.textContent = 'open the release page';
-      });
+      /* Rate limited or offline: the shipped release links are already in place. */
       document.querySelectorAll('[data-asset-link]').forEach((link) => {
-        if (!link.href || link.href.endsWith('#')) link.href = RELEASES_URL;
+        if (!link.getAttribute('href')) link.href = RELEASES_URL;
       });
     });
 })();
