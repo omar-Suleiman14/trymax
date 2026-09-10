@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Max. The offline-first operating system for your shop.">
+<link rel="canonical" href="https://trymax.vercel.app/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Max">
+<meta property="og:url" content="https://trymax.vercel.app/">
+<meta property="og:title" content="Max">
+<meta property="og:description" content="Max. The offline-first operating system for your shop.">
+<meta property="og:image" content="https://trymax.vercel.app/assets/app-inventory.png">
+<meta property="og:image:alt" content="The Max desktop application showing an inventory database.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Max">
+<meta name="twitter:description" content="Max. The offline-first operating system for your shop.">
+<meta name="twitter:image" content="https://trymax.vercel.app/assets/app-inventory.png">
+<link rel="icon" href="/assets/favicon.ico" sizes="48x48">
+<link rel="apple-touch-icon" href="/assets/max-mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;650&family=JetBrains+Mono:wght@400;500&display=swap">
+<title>Max</title>
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-github" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7 0-.7 0-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C16.9 4.9 18 5.2 18 5.2c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12 5.5 5.5L20 7"/></symbol>
+    <symbol id="i-windows" viewBox="0 0 24 24"><path fill="currentColor" d="M3 5.6 10.3 4.6v7H3zM11.4 4.4 21 3v8.6h-9.6zM3 12.6h7.3v6.8L3 18.4zM11.4 12.6H21V21l-9.6-1.4z"/></symbol>
+    <symbol id="i-apple" viewBox="0 0 24 24"><path fill="currentColor" d="M16.4 12.6c0-2.4 2-3.6 2.1-3.6-1.1-1.7-2.9-1.9-3.5-1.9-1.5-.2-2.9.9-3.6.9-.8 0-1.9-.9-3.1-.8-1.6 0-3 .9-3.8 2.4-1.7 2.9-.4 7.1 1.2 9.4.8 1.1 1.7 2.4 3 2.4 1.2 0 1.6-.8 3.1-.8 1.4 0 1.8.8 3.1.7 1.3 0 2.1-1.1 2.9-2.3.9-1.3 1.3-2.6 1.3-2.7 0 0-2.5-1-2.7-3.7ZM14 4.9c.7-.8 1.1-1.9 1-3-1 0-2.2.7-2.9 1.5-.6.7-1.1 1.8-1 2.9 1.1.1 2.2-.6 2.9-1.4Z"/></symbol>
+    <symbol id="i-terminal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m4 17 6-5-6-5M12 19h8"/></symbol>
+    <symbol id="i-database" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></symbol>
+    <symbol id="i-languages" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h10M8 3v2c0 4.4-2.2 8-5 9M5 9c0 2.6 3.1 5.3 7 6M12 20l4.5-10 4.5 10M14.5 16h5"/></symbol>
+    <symbol id="i-undo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8v5h5"/><path d="M3.5 13a8.5 8.5 0 1 0 2-6.6L3 9"/></symbol>
+    <symbol id="i-archive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="4" rx="1"/><path d="M5 8v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8M10 12h4"/></symbol>
+    <symbol id="i-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+  </defs>
+</svg>
+
+<div class="page">
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-brand" aria-label="Max home">
+      <img src="/assets/max-mark.png" alt="" width="24" height="24">
+      <span class="nav-brand-name">Max</span>
+    </a>
+    <div class="nav-right">
+      <a class="nav-link" href="/download">Download</a>
+      <a class="nav-pill" href="https://github.com/omar-Suleiman14/max" target="_blank" rel="noopener noreferrer">
+        <svg width="14" height="14" aria-hidden="true"><use href="#i-github"/></svg>
+        <span><strong data-version>v0.4.3</strong> on GitHub</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<main class="main">
+
+<section class="hero">
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="container hero-inner">
+    <h1 class="hero-title display">
+      <span data-rise>The offline-first</span><br>
+      <span data-rise style="--d:90ms">operating system</span><br>
+      <span data-rise style="--d:180ms">for your shop.</span>
+    </h1>
+    <p class="hero-sub" data-rise style="--d:300ms">Items, people, accounts and transactions live in one SQLite file on the machine in front of you. Configure Max into the shop you actually run, in Arabic or English, and keep recording work when the connection drops.</p>
+    <div class="hero-actions" data-rise style="--d:400ms">
+      <a data-download class="btn btn-primary btn-lg" href="https://github.com/omar-Suleiman14/max/releases/latest">
+        <svg class="dl-icon dl-icon--windows" aria-hidden="true"><use href="#i-windows"/></svg>
+        <svg class="dl-icon dl-icon--apple" aria-hidden="true"><use href="#i-apple"/></svg>
+        <svg class="dl-icon dl-icon--linux" aria-hidden="true"><use href="#i-terminal"/></svg>
+        <span data-download-label>Download for Windows</span>
+      </a>
+      <a class="hero-source-link" href="https://github.com/omar-Suleiman14/max" target="_blank" rel="noopener noreferrer">
+        <svg width="15" height="15" aria-hidden="true"><use href="#i-github"/></svg>
+        <span>Read the source</span>
+        <svg class="hero-source-arrow" width="12" height="12" aria-hidden="true"><use href="#i-arrow"/></svg>
+      </a>
+      <p class="hero-platform-line">Windows, macOS, Debian and Flatpak builds are on the <a href="/download">download page</a>.</p>
+    </div>
+    <div data-rise style="--d:520ms">
+      <div class="hero-preview">
+        <figure class="hero-screenshot-frame">
+          <img src="/assets/app-inventory.png" alt="The Max desktop application with an inventory database open" width="1280" height="800" loading="eager" decoding="async">
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec-primitives" aria-labelledby="primitives-title">
+  <div class="container">
+    <div class="section-head">
+      <h2 id="primitives-title">Nine primitives. Everything else is configuration.</h2>
+      <p>Max has no built-in idea of a phone, a customer or a wallet. It has items, people, accounts and transactions, and a blueprint that turns them into the shop you run.</p>
+    </div>
+  </div>
+  <div class="marquee" aria-label="The primitives Max is built from">
+    <div class="marquee-row">
+      <div class="marquee-track">
+        <div class="marquee-group">
+          <div class="primitive-card"><div class="primitive-name">Item</div><p>Anything the shop stocks, sells, repairs or lends.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Person</div><p>Customers, suppliers, staff. Whoever a transaction involves.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Account</div><p>Where money sits: the drawer, a wallet, a bank, a debt.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Transaction</div><p>Goods and money moving, recorded with who did it and when.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Property</div><p>The typed fields you define. IMEI is a property, not a feature.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Template</div><p>A saved starting point for the records you create all day.</p></div>
+          <div class="primitive-card"><div class="primitive-name">View</div><p>A filtered, sorted, grouped slice of a database.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Page</div><p>A document that holds text and databases side by side.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Blueprint</div><p>The whole configuration as one file you export and import.</p></div>
+        </div>
+        <div class="marquee-group" aria-hidden="true">
+          <div class="primitive-card"><div class="primitive-name">Item</div><p>Anything the shop stocks, sells, repairs or lends.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Person</div><p>Customers, suppliers, staff. Whoever a transaction involves.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Account</div><p>Where money sits: the drawer, a wallet, a bank, a debt.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Transaction</div><p>Goods and money moving, recorded with who did it and when.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Property</div><p>The typed fields you define. IMEI is a property, not a feature.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Template</div><p>A saved starting point for the records you create all day.</p></div>
+          <div class="primitive-card"><div class="primitive-name">View</div><p>A filtered, sorted, grouped slice of a database.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Page</div><p>A document that holds text and databases side by side.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Blueprint</div><p>The whole configuration as one file you export and import.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="marquee-row is-reverse is-types">
+      <div class="marquee-track">
+        <div class="marquee-group">
+          <span class="type-chip">text</span>
+          <span class="type-chip">number</span>
+          <span class="type-chip">money</span>
+          <span class="type-chip">date</span>
+          <span class="type-chip">checkbox</span>
+          <span class="type-chip">select</span>
+          <span class="type-chip">status</span>
+          <span class="type-chip">relation</span>
+          <span class="type-chip">rollup</span>
+          <span class="type-chip">formula</span>
+          <span class="type-chip">auto id</span>
+          <span class="type-chip">created time</span>
+        </div>
+        <div class="marquee-group" aria-hidden="true">
+          <span class="type-chip">text</span>
+          <span class="type-chip">number</span>
+          <span class="type-chip">money</span>
+          <span class="type-chip">date</span>
+          <span class="type-chip">checkbox</span>
+          <span class="type-chip">select</span>
+          <span class="type-chip">status</span>
+          <span class="type-chip">relation</span>
+          <span class="type-chip">rollup</span>
+          <span class="type-chip">formula</span>
+          <span class="type-chip">auto id</span>
+          <span class="type-chip">created time</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="local" class="sec-local">
+  <div class="container">
+    <div class="section-head">
+      <h2>No account. No server. No subscription.</h2>
+      <p>Max is a desktop application with a local database. Nothing is uploaded, nothing phones home, and every screen keeps working with the network unplugged.</p>
+    </div>
+    <div class="local-grid">
+      <div class="local-cell">
+        <div class="local-mark"><svg width="20" height="20" aria-hidden="true"><use href="#i-database"/></svg></div>
+        <div>
+          <div class="local-name">Local SQLite, authoritative</div>
+          <div class="local-tag">WAL · integrity check at startup</div>
+        </div>
+      </div>
+      <div class="local-cell">
+        <div class="local-mark"><svg width="20" height="20" aria-hidden="true"><use href="#i-languages"/></svg></div>
+        <div>
+          <div class="local-name">Arabic and English</div>
+          <div class="local-tag">RTL and LTR, both first class</div>
+        </div>
+      </div>
+      <div class="local-cell">
+        <div class="local-mark"><svg width="20" height="20" aria-hidden="true"><use href="#i-undo"/></svg></div>
+        <div>
+          <div class="local-name">Reversals, not deletions</div>
+          <div class="local-tag">a mistake becomes a counter-record</div>
+        </div>
+      </div>
+      <div class="local-cell">
+        <div class="local-mark"><svg width="20" height="20" aria-hidden="true"><use href="#i-archive"/></svg></div>
+        <div>
+          <div class="local-name">Backups you hold</div>
+          <div class="local-tag">safety snapshot before every restore</div>
+        </div>
+      </div>
+      <div class="local-cell">
+        <div class="local-mark"><svg width="20" height="20" aria-hidden="true"><use href="#i-zap"/></svg></div>
+        <div>
+          <div class="local-name">Quick actions</div>
+          <div class="local-tag">Ctrl S from anywhere in the app</div>
+        </div>
+      </div>
+      <div class="local-cell">
+        <div class="local-mark"><svg width="20" height="20" aria-hidden="true"><use href="#i-search"/></svg></div>
+        <div>
+          <div class="local-name">Search the whole workspace</div>
+          <div class="local-tag">Ctrl F across pages and records</div>
+        </div>
+      </div>
+    </div>
+    <div class="local-footer">
+      <div class="local-footer-item"><svg width="14" height="14" aria-hidden="true"><use href="#i-check"/></svg> Cloud backup is opt-in, never required.</div>
+      <div class="local-footer-item"><svg width="14" height="14" aria-hidden="true"><use href="#i-check"/></svg> Your data stays a file you can copy.</div>
+      <div class="local-footer-item"><svg width="14" height="14" aria-hidden="true"><use href="#i-check"/></svg> Windows, macOS and Linux builds.</div>
+    </div>
+  </div>
+</section>
+
+<section id="actions" class="sec-actions">
+  <div class="container split-inner">
+    <div class="split-visual" role="img" aria-label="A quick action form named Sale with four required fields, three optional fields folded away, and a record button.">
+      <div class="action-card tile">
+        <div class="action-head">
+          <svg width="16" height="16" aria-hidden="true"><use href="#i-zap"/></svg>
+          <span class="action-title">Sale</span>
+          <span class="action-status">Ready</span>
+        </div>
+        <div class="action-fields">
+          <div class="is-required"><code>Product</code> <span>Samsung Galaxy A55 128GB</span></div>
+          <div class="is-required"><code>Quantity</code> <span>1</span></div>
+          <div class="is-required"><code>Price</code> <span>12,500</span></div>
+          <div class="is-required"><code>Paid into</code> <span>Cash drawer</span></div>
+        </div>
+        <div class="action-more">
+          <svg width="12" height="12" aria-hidden="true"><use href="#i-arrow"/></svg>
+          Show 3 optional fields: customer, discount, note
+        </div>
+      </div>
+      <div class="action-trail">
+        <div class="action-trail-dot"></div>
+        <div class="action-trail-line"></div>
+        <div class="action-trail-dot"></div>
+      </div>
+      <div class="action-button-shell">
+        <span class="action-button">
+          <svg width="14" height="14" aria-hidden="true"><use href="#i-check"/></svg>
+          Record sale
+          <span class="action-button-kbd">Enter</span>
+        </span>
+      </div>
+    </div>
+    <div class="split-copy">
+      <div class="section-head" style="margin-bottom:0">
+        <h2>One form records the sale, the stock and the money.</h2>
+        <p>A quick action is a form you define yourself. Filling it once writes the transaction, moves the stock and posts the money to the right account. Required fields come first; optional ones stay folded away until you ask for them.</p>
+        <ul class="checklist" style="margin-top:24px">
+          <li><svg width="16" height="16" aria-hidden="true"><use href="#i-check"/></svg> Required fields first, optional fields collapsed</li>
+          <li><svg width="16" height="16" aria-hidden="true"><use href="#i-check"/></svg> Last used values remembered per action</li>
+          <li><svg width="16" height="16" aria-hidden="true"><use href="#i-check"/></svg> Reversals leave the original record in place</li>
+          <li><svg width="16" height="16" aria-hidden="true"><use href="#i-check"/></svg> Any view exports to Excel</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="open" class="sec-open">
+  <div class="container">
+    <div class="section-head open-head">
+      <div class="eyebrow">Open source</div>
+      <h2>If it does not fit your shop, change it.</h2>
+    </div>
+    <div class="open-grid">
+      <div class="tile open-term">
+        <div class="open-term-head">
+          <span></span><span></span><span></span>
+          <span class="open-term-title">~/code</span>
+        </div>
+        <div class="open-term-body">
+          <div><span class="prompt">$</span> git clone https://github.com/omar-Suleiman14/max</div>
+          <div class="dim">Cloned into ./max</div>
+          <div><span class="prompt">$</span> npm install &amp;&amp; npm run setup:runtime</div>
+          <div class="dim">Electron, esbuild and installer runtimes ready</div>
+          <div><span class="prompt">$</span> npm start</div>
+          <div class="dim">Max <span class="accent">v0.4.3</span> running from source</div>
+          <div class="cursor"><span class="prompt">$</span><span class="caret"></span></div>
+        </div>
+      </div>
+      <div class="tile open-pitch">
+        <ul class="open-pitch-list">
+          <li>
+            <span class="open-pitch-mark" aria-hidden="true"><svg width="12" height="12"><use href="#i-check"/></svg></span>
+            <span><strong>Change the interface.</strong> Every screen is React and TypeScript in one repository.</span>
+          </li>
+          <li>
+            <span class="open-pitch-mark" aria-hidden="true"><svg width="12" height="12"><use href="#i-check"/></svg></span>
+            <span><strong>Write your own shop.</strong> A blueprint is JSON you can export, edit and import back.</span>
+          </li>
+          <li>
+            <span class="open-pitch-mark" aria-hidden="true"><svg width="12" height="12"><use href="#i-check"/></svg></span>
+            <span><strong>Ship your own build.</strong> One command makes the installer for your platform.</span>
+          </li>
+        </ul>
+        <div class="open-pitch-footer">
+          <div class="open-pitch-meta">
+            <span>GPL-2.0 licensed</span>
+            <span aria-hidden="true">·</span>
+            <span data-version>v0.4.3</span>
+          </div>
+          <div class="open-pitch-actions">
+            <a class="btn btn-primary" href="https://github.com/omar-Suleiman14/max/fork" target="_blank" rel="noopener noreferrer">
+              <svg width="14" height="14" aria-hidden="true"><use href="#i-github"/></svg>
+              Fork on GitHub
+            </a>
+            <a class="open-source-link" href="https://github.com/omar-Suleiman14/max" target="_blank" rel="noopener noreferrer">
+              Browse source
+              <svg width="12" height="12" aria-hidden="true"><use href="#i-arrow"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="download" class="sec-cta">
+  <div class="container cta-inner">
+    <h2 class="display cta-title">The shop keeps working when the internet does not.</h2>
+    <p class="cta-sub">Max is free software. Install it, import a blueprint or build your own, and record today's work before the day ends.</p>
+    <div class="cta-actions">
+      <a data-download class="btn btn-primary btn-lg" href="https://github.com/omar-Suleiman14/max/releases/latest">
+        <svg class="dl-icon dl-icon--windows" aria-hidden="true"><use href="#i-windows"/></svg>
+        <svg class="dl-icon dl-icon--apple" aria-hidden="true"><use href="#i-apple"/></svg>
+        <svg class="dl-icon dl-icon--linux" aria-hidden="true"><use href="#i-terminal"/></svg>
+        <span data-download-label>Download for Windows</span>
+      </a>
+      <a class="btn btn-ghost btn-lg" href="/download">Windows · macOS · Linux</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="/assets/max-mark.png" alt="" width="20" height="20" loading="lazy">
+      <span>&copy; 2026 Max · GPL-2.0 licensed</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://github.com/omar-Suleiman14/max" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://github.com/omar-Suleiman14/max/releases" target="_blank" rel="noopener noreferrer">Releases</a>
+      <a href="/download">Download</a>
+      <a href="https://github.com/omar-Suleiman14/max/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">License</a>
+    </div>
+  </div>
+</footer>
+
+</div>
+<script src="/site.js"></script>
+</body>
+</html>
