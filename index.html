@@ -35,7 +35,7 @@
     <symbol id="i-terminal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m4 17 6-5-6-5M12 19h8"/></symbol>
     <symbol id="i-database" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></symbol>
     <symbol id="i-languages" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h10M8 3v2c0 4.4-2.2 8-5 9M5 9c0 2.6 3.1 5.3 7 6M12 20l4.5-10 4.5 10M14.5 16h5"/></symbol>
-    <symbol id="i-undo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8v5h5"/><path d="M3.5 13a8.5 8.5 0 1 0 2-6.6L3 9"/></symbol>
+    <symbol id="i-graph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.6"/><circle cx="5" cy="5.5" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="6" cy="19" r="2"/><circle cx="18.5" cy="18" r="2"/><path d="m6.5 7 3.6 3.4M17.6 7.6 13.9 10.6M10.2 13.7 7.4 17.4M13.9 13.6l3 3"/></symbol>
     <symbol id="i-archive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="4" rx="1"/><path d="M5 8v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8M10 12h4"/></symbol>
     <symbol id="i-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></symbol>
     <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
@@ -70,7 +70,7 @@
       <span data-rise style="--d:90ms">operating system</span><br>
       <span data-rise style="--d:180ms">for your workspace.</span>
     </h1>
-    <p class="hero-sub" data-rise style="--d:300ms">Items, people, accounts and transactions live in one SQLite file on the machine in front of you. Configure Max into the workspace you actually run, in Arabic or English, and keep recording work when the connection drops.</p>
+    <p class="hero-sub" data-rise style="--d:300ms">Pages, databases and records live in one SQLite file on the machine in front of you. Build the workspace the work needs, in Arabic or English, and keep going when the connection drops.</p>
     <div class="hero-actions" data-rise style="--d:400ms">
       <a data-download class="btn btn-primary btn-lg" href="https://github.com/omar-Suleiman14/max/releases/latest">
         <svg class="dl-icon dl-icon--windows" aria-hidden="true"><use href="#i-windows"/></svg>
@@ -98,34 +98,34 @@
 <section class="sec-primitives" aria-labelledby="primitives-title">
   <div class="container">
     <div class="section-head">
-      <h2 id="primitives-title">Nine primitives. Everything else is configuration.</h2>
-      <p>Max has no built-in idea of a phone, a customer or a wallet. It has items, people, accounts and transactions, and a blueprint that turns them into the workspace you run.</p>
+      <h2 id="primitives-title">Pages and databases. You define the rest.</h2>
+      <p>Max has no fixed schema and no built-in idea of what you do. You make a database, give it the properties the work needs, and read it back through the view that suits it.</p>
     </div>
   </div>
-  <div class="marquee" aria-label="The primitives Max is built from">
+  <div class="marquee" aria-label="What a Max workspace is built from">
     <div class="marquee-row">
       <div class="marquee-track">
         <div class="marquee-group">
-          <div class="primitive-card"><div class="primitive-name">Item</div><p>Anything you track: stock, tools, parts, equipment.</p></div>
-          <div class="primitive-card"><div class="primitive-name">Person</div><p>Customers, suppliers, staff, members. Whoever a record involves.</p></div>
-          <div class="primitive-card"><div class="primitive-name">Account</div><p>Where money sits: the drawer, a wallet, a bank, a debt.</p></div>
-          <div class="primitive-card"><div class="primitive-name">Transaction</div><p>Things and money moving, recorded with who did it and when.</p></div>
-          <div class="primitive-card"><div class="primitive-name">Property</div><p>The typed fields you define. Serial number is a property, not a feature.</p></div>
-          <div class="primitive-card"><div class="primitive-name">Template</div><p>A saved starting point for the records you create all day.</p></div>
-          <div class="primitive-card"><div class="primitive-name">View</div><p>A filtered, sorted, grouped slice of a database.</p></div>
-          <div class="primitive-card"><div class="primitive-name">Page</div><p>A document that holds text and databases side by side.</p></div>
-          <div class="primitive-card"><div class="primitive-name">Blueprint</div><p>The whole configuration as one file you export and import.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Page</div><p>Text, headings, toggles, callouts, code, and databases inline.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Database</div><p>Records with the properties you define, and none you did not.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Property</div><p>Seventeen types, from text and date to relation, rollup and formula.</p></div>
+          <div class="primitive-card"><div class="primitive-name">View</div><p>Table, board, list, calendar or gallery over the same records.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Record</div><p>A row that opens as a page, with a body of its own.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Relation</div><p>Point records at records, then roll their values up.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Quick action</div><p>A form you define that creates and updates records in one pass.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Graph</div><p>Every page and link in the workspace, filtered and coloured.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Blueprint</div><p>The whole structure as one JSON file you export and import.</p></div>
         </div>
         <div class="marquee-group" aria-hidden="true">
-          <div class="primitive-card"><div class="primitive-name">Item</div><p>Anything you track: stock, tools, parts, equipment.</p></div>
-          <div class="primitive-card"><div class="primitive-name">Person</div><p>Customers, suppliers, staff, members. Whoever a record involves.</p></div>
-          <div class="primitive-card"><div class="primitive-name">Account</div><p>Where money sits: the drawer, a wallet, a bank, a debt.</p></div>
-          <div class="primitive-card"><div class="primitive-name">Transaction</div><p>Things and money moving, recorded with who did it and when.</p></div>
-          <div class="primitive-card"><div class="primitive-name">Property</div><p>The typed fields you define. Serial number is a property, not a feature.</p></div>
-          <div class="primitive-card"><div class="primitive-name">Template</div><p>A saved starting point for the records you create all day.</p></div>
-          <div class="primitive-card"><div class="primitive-name">View</div><p>A filtered, sorted, grouped slice of a database.</p></div>
-          <div class="primitive-card"><div class="primitive-name">Page</div><p>A document that holds text and databases side by side.</p></div>
-          <div class="primitive-card"><div class="primitive-name">Blueprint</div><p>The whole configuration as one file you export and import.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Page</div><p>Text, headings, toggles, callouts, code, and databases inline.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Database</div><p>Records with the properties you define, and none you did not.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Property</div><p>Seventeen types, from text and date to relation, rollup and formula.</p></div>
+          <div class="primitive-card"><div class="primitive-name">View</div><p>Table, board, list, calendar or gallery over the same records.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Record</div><p>A row that opens as a page, with a body of its own.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Relation</div><p>Point records at records, then roll their values up.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Quick action</div><p>A form you define that creates and updates records in one pass.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Graph</div><p>Every page and link in the workspace, filtered and coloured.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Blueprint</div><p>The whole structure as one JSON file you export and import.</p></div>
         </div>
       </div>
     </div>
@@ -134,30 +134,40 @@
         <div class="marquee-group">
           <span class="type-chip">text</span>
           <span class="type-chip">number</span>
-          <span class="type-chip">money</span>
+          <span class="type-chip">select</span>
+          <span class="type-chip">multi-select</span>
+          <span class="type-chip">status</span>
           <span class="type-chip">date</span>
           <span class="type-chip">checkbox</span>
-          <span class="type-chip">select</span>
-          <span class="type-chip">status</span>
           <span class="type-chip">relation</span>
-          <span class="type-chip">rollup</span>
+          <span class="type-chip">url</span>
+          <span class="type-chip">email</span>
+          <span class="type-chip">phone</span>
           <span class="type-chip">formula</span>
-          <span class="type-chip">auto id</span>
+          <span class="type-chip">rollup</span>
+          <span class="type-chip">file</span>
           <span class="type-chip">created time</span>
+          <span class="type-chip">last edited time</span>
+          <span class="type-chip">auto id</span>
         </div>
         <div class="marquee-group" aria-hidden="true">
           <span class="type-chip">text</span>
           <span class="type-chip">number</span>
-          <span class="type-chip">money</span>
+          <span class="type-chip">select</span>
+          <span class="type-chip">multi-select</span>
+          <span class="type-chip">status</span>
           <span class="type-chip">date</span>
           <span class="type-chip">checkbox</span>
-          <span class="type-chip">select</span>
-          <span class="type-chip">status</span>
           <span class="type-chip">relation</span>
-          <span class="type-chip">rollup</span>
+          <span class="type-chip">url</span>
+          <span class="type-chip">email</span>
+          <span class="type-chip">phone</span>
           <span class="type-chip">formula</span>
-          <span class="type-chip">auto id</span>
+          <span class="type-chip">rollup</span>
+          <span class="type-chip">file</span>
           <span class="type-chip">created time</span>
+          <span class="type-chip">last edited time</span>
+          <span class="type-chip">auto id</span>
         </div>
       </div>
     </div>
@@ -167,7 +177,7 @@
 <section id="local" class="sec-local">
   <div class="container">
     <div class="section-head">
-      <h2>No account. No server. No subscription.</h2>
+      <h2>No sign-up. No server. No subscription.</h2>
       <p>Max is a desktop application with a local database. Nothing is uploaded, nothing phones home, and every screen keeps working with the network unplugged.</p>
     </div>
     <div class="local-grid">
@@ -186,10 +196,10 @@
         </div>
       </div>
       <div class="local-cell">
-        <div class="local-mark"><svg width="20" height="20" aria-hidden="true"><use href="#i-undo"/></svg></div>
+        <div class="local-mark"><svg width="20" height="20" aria-hidden="true"><use href="#i-graph"/></svg></div>
         <div>
-          <div class="local-name">Reversals, not deletions</div>
-          <div class="local-tag">a mistake becomes a counter-record</div>
+          <div class="local-name">The workspace as a graph</div>
+          <div class="local-tag">Ctrl G, coloured by path or property</div>
         </div>
       </div>
       <div class="local-cell">
@@ -224,22 +234,22 @@
 
 <section id="actions" class="sec-actions">
   <div class="container split-inner">
-    <div class="split-visual" role="img" aria-label="A quick action form named Sale with four required fields, three optional fields folded away, and a record button.">
+    <div class="split-visual" role="img" aria-label="A quick action form named Log hours with four required fields, three optional fields folded away, and a save button.">
       <div class="action-card tile">
         <div class="action-head">
           <svg width="16" height="16" aria-hidden="true"><use href="#i-zap"/></svg>
-          <span class="action-title">Sale</span>
+          <span class="action-title">Log hours</span>
           <span class="action-status">Ready</span>
         </div>
         <div class="action-fields">
-          <div class="is-required"><code>Item</code> <span>Samsung Galaxy A55 128GB</span></div>
-          <div class="is-required"><code>Quantity</code> <span>1</span></div>
-          <div class="is-required"><code>Price</code> <span>12,500</span></div>
-          <div class="is-required"><code>Paid into</code> <span>Cash drawer</span></div>
+          <div class="is-required"><code>Project</code> <span>Warehouse migration</span></div>
+          <div class="is-required"><code>Task</code> <span>Move shelving plan to v2</span></div>
+          <div class="is-required"><code>Hours</code> <span>3.5</span></div>
+          <div class="is-required"><code>Date</code> <span>Today</span></div>
         </div>
         <div class="action-more">
           <svg width="12" height="12" aria-hidden="true"><use href="#i-arrow"/></svg>
-          Show 3 optional fields: person, discount, note
+          Show 3 optional fields: person, tags, note
         </div>
       </div>
       <div class="action-trail">
@@ -250,20 +260,20 @@
       <div class="action-button-shell">
         <span class="action-button">
           <svg width="14" height="14" aria-hidden="true"><use href="#i-check"/></svg>
-          Record sale
+          Save entry
           <span class="action-button-kbd">Enter</span>
         </span>
       </div>
     </div>
     <div class="split-copy">
       <div class="section-head" style="margin-bottom:0">
-        <h2>One form writes every record the event touches.</h2>
-        <p>A quick action is a form you define yourself. Filling it once writes the transaction, moves the item and posts the money to the right account. Required fields come first, and optional ones stay folded away until you ask for them.</p>
+        <h2>One form, every record it touches.</h2>
+        <p>A quick action is a form you define yourself. You name the inputs, and one run can find a record, create another and update a third. Required fields come first, and optional ones stay folded away until you ask for them.</p>
         <ul class="checklist" style="margin-top:24px">
           <li><svg width="16" height="16" aria-hidden="true"><use href="#i-check"/></svg> Required fields first, optional fields collapsed</li>
           <li><svg width="16" height="16" aria-hidden="true"><use href="#i-check"/></svg> Last used values remembered per action</li>
-          <li><svg width="16" height="16" aria-hidden="true"><use href="#i-check"/></svg> Reversals leave the original record in place</li>
-          <li><svg width="16" height="16" aria-hidden="true"><use href="#i-check"/></svg> Any view exports to Excel</li>
+          <li><svg width="16" height="16" aria-hidden="true"><use href="#i-check"/></svg> One run can find, create and update records</li>
+          <li><svg width="16" height="16" aria-hidden="true"><use href="#i-check"/></svg> Any database view exports to Excel</li>
         </ul>
       </div>
     </div>
@@ -288,7 +298,7 @@
           <div><span class="prompt">$</span> npm install &amp;&amp; npm run setup:runtime</div>
           <div class="dim">Electron, esbuild and installer runtimes ready</div>
           <div><span class="prompt">$</span> npm start</div>
-          <div class="dim">Max <span class="accent">v0.4.3</span> running from source</div>
+          <div class="dim">Max <span class="accent" data-version>v0.4.3</span> running from source</div>
           <div class="cursor"><span class="prompt">$</span><span class="caret"></span></div>
         </div>
       </div>
@@ -332,7 +342,7 @@
 <section id="download" class="sec-cta">
   <div class="container cta-inner">
     <h2 class="display cta-title">Your work keeps going when the internet does not.</h2>
-    <p class="cta-sub">Max is free software. Install it, import a blueprint or build your own, and record today's work before the day ends.</p>
+    <p class="cta-sub">Max is free software. Install it, import a blueprint or start from an empty page, and keep the workspace on your own machine.</p>
     <div class="cta-actions">
       <a data-download class="btn btn-primary btn-lg" href="https://github.com/omar-Suleiman14/max/releases/latest">
         <svg class="dl-icon dl-icon--windows" aria-hidden="true"><use href="#i-windows"/></svg>

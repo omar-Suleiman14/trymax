@@ -5,18 +5,9 @@
   const API_URL = `https://api.github.com/repos/${REPO}/releases/latest`;
   const CACHE_KEY = 'max:latest-release';
 
-  /* Shipped with the page so every button holds a direct installer link before
-     the API answers, and still holds one if it never does. Bump on release. */
-  const SHIPPED = {
-    tag_name: 'v0.4.3',
-    assets: [
-      'Max-0.4.3.Setup.exe',
-      'Max-darwin-arm64-0.4.3.zip',
-      'max-shop-os_0.4.3_amd64.deb',
-      'com.maxshop.Max_stable_x86_64.flatpak',
-    ].map((name) => ({ name, browser_download_url: `https://github.com/${REPO}/releases/download/v0.4.3/${name}` })),
-  };
-
+  /* Electron Forge puts the version in three of the four filenames, so only the
+     flatpak has a name that /releases/latest/download can resolve. Everything
+     else is read from the API, and nothing here is ever pinned to a version. */
   const PATTERNS = {
     windows: /\.exe$/i,
     mac: /(darwin|mac).*\.(zip|dmg)$/i,
@@ -71,7 +62,13 @@
     }
   };
 
-  const findAsset = (release, kind) => (release.assets ?? []).find((asset) => PATTERNS[kind].test(asset.name));
+  const findAsset = (release, kind) => (release?.assets ?? []).find((asset) => PATTERNS[kind].test(asset.name));
+
+  const linkTo = (node, asset) => {
+    node.href = asset.browser_download_url;
+    node.setAttribute('download', '');
+    node.dataset.resolved = 'true';
+  };
 
   const apply = (release) => {
     if (!release) return;
@@ -83,41 +80,56 @@
     }
 
     const asset = platform ? findAsset(release, platform) : null;
-    document.querySelectorAll('[data-download]').forEach((button) => {
-      if (!asset) return;
-      button.href = asset.browser_download_url;
-      button.setAttribute('download', '');
-    });
+    if (asset) document.querySelectorAll('[data-download]').forEach((button) => linkTo(button, asset));
 
     document.querySelectorAll('[data-asset]').forEach((row) => {
       const match = findAsset(release, row.dataset.asset);
       const link = row.querySelector('[data-asset-link]');
       const meta = row.querySelector('[data-asset-meta]');
       if (!match || !link) return;
-      link.href = match.browser_download_url;
-      link.setAttribute('download', '');
+      linkTo(link, match);
       if (meta) meta.textContent = match.size ? `${match.name}, ${formatSize(match.size)}` : match.name;
     });
   };
 
-  apply(SHIPPED);
+  /* The cached release is a session-old view of "latest", so it is only used to
+     paint the page. The live request below is what any click waits on. */
   apply(readCache());
 
-  fetch(API_URL, { headers: { Accept: 'application/vnd.github+json' } })
+  const latest = fetch(API_URL, { headers: { Accept: 'application/vnd.github+json' } })
     .then((response) => (response.ok ? response.json() : Promise.reject(new Error(String(response.status)))))
     .then((release) => {
       const trimmed = {
         tag_name: release.tag_name,
         assets: (release.assets ?? []).map(({ name, size, browser_download_url }) => ({ name, size, browser_download_url })),
       };
-      if (!trimmed.assets.length) return;
+      if (!trimmed.assets.length) return null;
       writeCache(trimmed);
       apply(trimmed);
+      return trimmed;
     })
-    .catch(() => {
-      /* Rate limited or offline: the shipped release links are already in place. */
-      document.querySelectorAll('[data-asset-link]').forEach((link) => {
-        if (!link.getAttribute('href')) link.href = RELEASES_URL;
-      });
+    .catch(() => null);
+
+  /* Until the release resolves, a button still points at /releases/latest, which
+     is correct but is a page rather than a file. Clicking early holds the
+     navigation for the request instead of sending the visitor to GitHub. */
+  const resolveOnClick = (event) => {
+    const node = event.target.closest('[data-download], [data-asset-link]');
+    if (!node || node.dataset.resolved === 'true') return;
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
+    event.preventDefault();
+    const row = node.closest('[data-asset]');
+    const kind = row ? row.dataset.asset : platform;
+    node.classList.add('is-resolving');
+
+    latest.then((release) => {
+      node.classList.remove('is-resolving');
+      const asset = kind ? findAsset(release, kind) : null;
+      if (asset) linkTo(node, asset);
+      window.location.href = asset ? asset.browser_download_url : RELEASES_URL;
     });
+  };
+
+  document.addEventListener('click', resolveOnClick);
 })();

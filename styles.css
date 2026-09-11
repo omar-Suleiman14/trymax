@@ -544,6 +544,9 @@ html:not([data-platform]) .dl-icon--windows { display: block; }
 .open-pitch-footer { display: flex; flex-direction: column; gap: 18px; }
 .open-pitch-meta { display: flex; align-items: center; gap: 8px; color: var(--fg-dim); font-family: var(--font-mono); font-size: 11px; }
 .meta-sep { width: 1px; height: 10px; background: var(--border-strong); }
+
+/* Held while a click waits for the latest release to resolve. */
+.is-resolving { opacity: .7; pointer-events: none; }
 .open-pitch-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
 
 .open-source-link { display: inline-flex; align-items: center; gap: 6px; color: var(--fg-muted); font-size: 13px; font-weight: 500; transition: color .18s; }

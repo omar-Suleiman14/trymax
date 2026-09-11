@@ -40,10 +40,15 @@ the button straight at the matching installer:
 | Debian | `*.deb` |
 | Flatpak | `*.flatpak` |
 
-Before the API answers, and if it never does, the buttons use the release
-pinned in the `SHIPPED` constant at the top of `site.js`, so a visitor always
-gets a direct installer link rather than the releases page. Bump that constant
-when a release changes the asset filenames.
+No version is pinned anywhere in this repository. Until the request answers,
+the buttons still point at `/releases/latest`, and clicking one holds the
+navigation until the matching asset URL is known. If the request fails, the
+click falls through to the releases page.
+
+Electron Forge writes the version into three of the four filenames, so
+`/releases/latest/download/<name>` only resolves for
+`com.maxshop.Max_stable_x86_64.flatpak`. That row links there directly; the
+other three need the API.
 
 The version shown in the nav and in the open-source panel is filled from the
 same release, so publishing a release is the only step needed to update it.
