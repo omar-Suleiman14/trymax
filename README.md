@@ -63,7 +63,7 @@ the button straight at the matching installer:
 | Platform | Asset pattern |
 | --- | --- |
 | Windows | `*.exe` |
-| macOS | `*darwin*.zip` or `*.dmg` |
+| macOS | Apple silicon `*arm64*.dmg` or `*aarch64*.dmg` |
 | Debian | `*.deb` |
 | Flatpak | `*.flatpak` |
 
@@ -79,3 +79,6 @@ other three need the API.
 
 The version shown in the nav and in the open-source panel is filled from the
 same release, so publishing a release is the only step needed to update it.
+
+Mac downloads select the Apple silicon DMG, never the ZIP update archive or
+an Intel installer. If it is missing, the button opens the latest release.

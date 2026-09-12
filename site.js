@@ -10,7 +10,7 @@
      else is read from the API, and nothing here is ever pinned to a version. */
   const PATTERNS = {
     windows: /\.exe$/i,
-    mac: /(darwin|mac).*\.(zip|dmg)$/i,
+    mac: /(?:^|[-_.])(?:arm64|aarch64)(?:[-_.].*)?\.dmg$/i,
     linux: /\.deb$/i,
     flatpak: /\.flatpak$/i,
   };
@@ -115,7 +115,7 @@
      navigation for the request instead of sending the visitor to GitHub. */
   const resolveOnClick = (event) => {
     const node = event.target.closest('[data-download], [data-asset-link]');
-    if (!node || node.dataset.resolved === 'true') return;
+    if (!node) return;
     if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
 
     event.preventDefault();
