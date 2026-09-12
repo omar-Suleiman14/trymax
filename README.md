@@ -49,7 +49,7 @@ The page uses the WebP. The PNG stays because some social crawlers still do not
 read WebP, and an Open Graph card is never shown wider than 1200px.
 
 Favicons are built from the complete `assets/max-mark.png` with
-`python tools/build-icons.py` (requires Pillow). The mark is centered on a dark
+`python tools/build-icons.py` (requires Pillow). The mark is centered on a transparent
 square with padding. PNG icons are provided at 32, 192 and 512px, Apple touch
 icons at 180px, and ICO files at 16–256px. Root `/favicon.ico` and
 `/apple-touch-icon.png` also support clients that discover icons without HTML.

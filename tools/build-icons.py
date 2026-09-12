@@ -9,7 +9,7 @@ ASSETS = ROOT / 'assets'
 mark = Image.open(ASSETS / 'max-mark.png').convert('RGBA')
 # Keep the complete source square; fit before centering, never crop a wing.
 def tile(size):
-    result = Image.new('RGBA', (size, size), '#121214')
+    result = Image.new('RGBA', (size, size), (0, 0, 0, 0))
     inset = round(size * .08)
     fitted = mark.copy()
     fitted.thumbnail((size - inset * 2, size - inset * 2), Image.Resampling.LANCZOS)
