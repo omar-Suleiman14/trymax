@@ -3,21 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Max. The offline-first operating system for your workspace.">
+<meta name="description" content="Pages, databases and linked records in a desktop workspace. Saved on your computer. Works offline.">
 <link rel="canonical" href="https://trymax.vercel.app/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Max">
 <meta property="og:url" content="https://trymax.vercel.app/">
 <meta property="og:title" content="Max">
-<meta property="og:description" content="Max. The offline-first operating system for your workspace.">
-<meta property="og:image" content="https://trymax.vercel.app/assets/app-graph.png">
-<meta property="og:image:alt" content="The Max desktop application showing the page graph of a workspace.">
+<meta property="og:description" content="Pages, databases and linked records in a desktop workspace. Saved on your computer. Works offline.">
+<meta property="og:image" content="https://trymax.vercel.app/assets/app-graph.png?v=20260913-3">
+<meta property="og:image:alt" content="The Max desktop app showing a workspace drawn as a graph of linked pages.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Max">
-<meta name="twitter:description" content="Max. The offline-first operating system for your workspace.">
-<meta name="twitter:image" content="https://trymax.vercel.app/assets/app-graph.png">
-<link rel="icon" href="/assets/favicon.ico" sizes="48x48">
-<link rel="apple-touch-icon" href="/assets/max-mark.png">
+<meta name="twitter:description" content="Pages, databases and linked records in a desktop workspace. Saved on your computer. Works offline.">
+<meta name="twitter:image" content="https://trymax.vercel.app/assets/app-graph.png?v=20260913-3">
+<link rel="icon" href="/favicon.ico?v=20260913-complete" sizes="16x16 24x24 32x32 48x48 64x64 128x128 256x256">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/max-icon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/max-icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20260913-complete">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;650&family=JetBrains+Mono:wght@400;500&display=swap">
@@ -66,11 +68,11 @@
   <div class="hero-grid" aria-hidden="true"></div>
   <div class="container hero-inner">
     <h1 class="hero-title display">
-      <span data-rise>The offline-first</span><br>
-      <span data-rise style="--d:90ms">operating system</span><br>
-      <span data-rise style="--d:180ms">for your workspace.</span>
+      <span data-rise>Your whole workspace</span><br>
+      <span data-rise style="--d:90ms">is one file on</span><br>
+      <span data-rise style="--d:180ms">your own computer.</span>
     </h1>
-    <p class="hero-sub" data-rise style="--d:300ms">Pages, databases and records live in one SQLite file on the machine in front of you. Build the workspace the work needs, in Arabic or English, and keep going when the connection drops.</p>
+    <p class="hero-sub" data-rise style="--d:300ms">Keep notes, manage records and connect your work. Max saves everything on your computer and works offline, in Arabic or English.</p>
     <div class="hero-actions" data-rise style="--d:400ms">
       <a data-download class="btn btn-primary btn-lg" href="https://github.com/omar-Suleiman14/max/releases/latest">
         <svg class="dl-icon dl-icon--windows" aria-hidden="true"><use href="#i-windows"/></svg>
@@ -88,7 +90,7 @@
     <div data-rise style="--d:520ms">
       <div class="hero-preview">
         <figure class="hero-screenshot-frame">
-          <img src="/assets/app-graph.png" alt="The Max desktop application showing the page graph of a workspace, with colour groups and filters open" width="2160" height="1350" loading="eager" decoding="async">
+          <img src="/assets/app-graph.webp?v=20260913-3" alt="The Max desktop app showing a workspace as a graph of linked pages, with colour groups and filters open" width="2160" height="1350" loading="eager" decoding="async">
         </figure>
       </div>
     </div>
@@ -98,8 +100,8 @@
 <section class="sec-primitives" aria-labelledby="primitives-title">
   <div class="container">
     <div class="section-head">
-      <h2 id="primitives-title">Pages and databases. You define the rest.</h2>
-      <p>Max has no fixed schema and no built-in idea of what you do. You make a database, give it the properties the work needs, and read it back through the view that suits it.</p>
+      <h2 id="primitives-title">Your data, your structure.</h2>
+      <p>Add the fields you need. View the same records as a table, board, list, calendar or gallery.</p>
     </div>
   </div>
   <div class="marquee" aria-label="What a Max workspace is built from">
@@ -107,25 +109,25 @@
       <div class="marquee-track">
         <div class="marquee-group">
           <div class="primitive-card"><div class="primitive-name">Page</div><p>Text, headings, toggles, callouts, code, and databases inline.</p></div>
-          <div class="primitive-card"><div class="primitive-name">Database</div><p>Records with the properties you define, and none you did not.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Database</div><p>Your records, with the fields you need.</p></div>
           <div class="primitive-card"><div class="primitive-name">Property</div><p>Seventeen types, from text and date to relation, rollup and formula.</p></div>
           <div class="primitive-card"><div class="primitive-name">View</div><p>Table, board, list, calendar or gallery over the same records.</p></div>
-          <div class="primitive-card"><div class="primitive-name">Record</div><p>A row that opens as a page, with a body of its own.</p></div>
-          <div class="primitive-card"><div class="primitive-name">Relation</div><p>Point records at records, then roll their values up.</p></div>
-          <div class="primitive-card"><div class="primitive-name">Quick action</div><p>A form you define that creates and updates records in one pass.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Record</div><p>A row that opens as a full page you can write in.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Relation</div><p>Link records across databases and roll up their values.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Quick action</div><p>A form you define that writes to several databases at once.</p></div>
           <div class="primitive-card"><div class="primitive-name">Graph</div><p>Every page and link in the workspace, filtered and coloured.</p></div>
-          <div class="primitive-card"><div class="primitive-name">Blueprint</div><p>The whole structure as one JSON file you export and import.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Blueprint</div><p>Export a workspace structure and reuse it.</p></div>
         </div>
         <div class="marquee-group" aria-hidden="true">
           <div class="primitive-card"><div class="primitive-name">Page</div><p>Text, headings, toggles, callouts, code, and databases inline.</p></div>
-          <div class="primitive-card"><div class="primitive-name">Database</div><p>Records with the properties you define, and none you did not.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Database</div><p>Your records, with the fields you need.</p></div>
           <div class="primitive-card"><div class="primitive-name">Property</div><p>Seventeen types, from text and date to relation, rollup and formula.</p></div>
           <div class="primitive-card"><div class="primitive-name">View</div><p>Table, board, list, calendar or gallery over the same records.</p></div>
-          <div class="primitive-card"><div class="primitive-name">Record</div><p>A row that opens as a page, with a body of its own.</p></div>
-          <div class="primitive-card"><div class="primitive-name">Relation</div><p>Point records at records, then roll their values up.</p></div>
-          <div class="primitive-card"><div class="primitive-name">Quick action</div><p>A form you define that creates and updates records in one pass.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Record</div><p>A row that opens as a full page you can write in.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Relation</div><p>Link records across databases and roll up their values.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Quick action</div><p>A form you define that writes to several databases at once.</p></div>
           <div class="primitive-card"><div class="primitive-name">Graph</div><p>Every page and link in the workspace, filtered and coloured.</p></div>
-          <div class="primitive-card"><div class="primitive-name">Blueprint</div><p>The whole structure as one JSON file you export and import.</p></div>
+          <div class="primitive-card"><div class="primitive-name">Blueprint</div><p>Export a workspace structure and reuse it.</p></div>
         </div>
       </div>
     </div>
@@ -177,56 +179,56 @@
 <section id="local" class="sec-local">
   <div class="container">
     <div class="section-head">
-      <h2>No sign-up. No server. No subscription.</h2>
-      <p>Max is a desktop application with a local database. Nothing is uploaded, nothing phones home, and every screen keeps working with the network unplugged.</p>
+      <h2>Open Max. Get to work.</h2>
+      <p>No account needed. Your pages, search and graph work offline. Cloud backup is optional.</p>
     </div>
     <div class="local-grid">
       <div class="local-cell">
         <div class="local-mark"><svg width="20" height="20" aria-hidden="true"><use href="#i-database"/></svg></div>
         <div>
-          <div class="local-name">Local SQLite, authoritative</div>
-          <div class="local-tag">WAL, with an integrity check at startup</div>
+          <div class="local-name">Saved on your computer</div>
+          <div class="local-tag">One workspace file, easy to copy</div>
         </div>
       </div>
       <div class="local-cell">
         <div class="local-mark"><svg width="20" height="20" aria-hidden="true"><use href="#i-languages"/></svg></div>
         <div>
           <div class="local-name">Arabic and English</div>
-          <div class="local-tag">RTL and LTR, both first class</div>
+          <div class="local-tag">Right-to-left and left-to-right layouts</div>
         </div>
       </div>
       <div class="local-cell">
         <div class="local-mark"><svg width="20" height="20" aria-hidden="true"><use href="#i-graph"/></svg></div>
         <div>
-          <div class="local-name">The workspace as a graph</div>
+          <div class="local-name">See how pages connect</div>
           <div class="local-tag">Ctrl G, coloured by path or property</div>
         </div>
       </div>
       <div class="local-cell">
         <div class="local-mark"><svg width="20" height="20" aria-hidden="true"><use href="#i-archive"/></svg></div>
         <div>
-          <div class="local-name">Backups you hold</div>
-          <div class="local-tag">safety snapshot before every restore</div>
+          <div class="local-name">Local backups</div>
+          <div class="local-tag">A safety copy before each restore</div>
         </div>
       </div>
       <div class="local-cell">
         <div class="local-mark"><svg width="20" height="20" aria-hidden="true"><use href="#i-zap"/></svg></div>
         <div>
           <div class="local-name">Quick actions</div>
-          <div class="local-tag">Ctrl S from anywhere in the app</div>
+          <div class="local-tag">Find and run actions with Ctrl K</div>
         </div>
       </div>
       <div class="local-cell">
         <div class="local-mark"><svg width="20" height="20" aria-hidden="true"><use href="#i-search"/></svg></div>
         <div>
           <div class="local-name">Search the whole workspace</div>
-          <div class="local-tag">Ctrl F across pages and records</div>
+          <div class="local-tag">Ctrl K for pages, records and actions</div>
         </div>
       </div>
     </div>
     <div class="local-footer">
-      <div class="local-footer-item"><svg width="14" height="14" aria-hidden="true"><use href="#i-check"/></svg> Cloud backup is opt-in, never required.</div>
-      <div class="local-footer-item"><svg width="14" height="14" aria-hidden="true"><use href="#i-check"/></svg> Your data stays a file you can copy.</div>
+      <div class="local-footer-item"><svg width="14" height="14" aria-hidden="true"><use href="#i-check"/></svg> Cloud backup is optional.</div>
+      <div class="local-footer-item"><svg width="14" height="14" aria-hidden="true"><use href="#i-check"/></svg> Copy your workspace to move it between computers.</div>
       <div class="local-footer-item"><svg width="14" height="14" aria-hidden="true"><use href="#i-check"/></svg> Windows, macOS and Linux builds.</div>
     </div>
   </div>
@@ -267,8 +269,8 @@
     </div>
     <div class="split-copy">
       <div class="section-head" style="margin-bottom:0">
-        <h2>One form, every record it touches.</h2>
-        <p>A quick action is a form you define yourself. You name the inputs, and one run can find a record, create another and update a third. Required fields come first, and optional ones stay folded away until you ask for them.</p>
+        <h2>Make a form for the work you repeat.</h2>
+        <p>Log hours, add an order or update stock from one form. Choose the fields and which records it creates or updates. Max remembers your last entries.</p>
         <ul class="checklist" style="margin-top:24px">
           <li><svg width="16" height="16" aria-hidden="true"><use href="#i-check"/></svg> Required fields first, optional fields collapsed</li>
           <li><svg width="16" height="16" aria-hidden="true"><use href="#i-check"/></svg> Last used values remembered per action</li>
@@ -284,7 +286,7 @@
   <div class="container">
     <div class="section-head open-head">
       <div class="eyebrow">Open source</div>
-      <h2>If it does not fit the way you work, change it.</h2>
+      <h2>Read the code. Make it yours.</h2>
     </div>
     <div class="open-grid">
       <div class="tile open-term">
@@ -306,15 +308,15 @@
         <ul class="open-pitch-list">
           <li>
             <span class="open-pitch-mark" aria-hidden="true"><svg width="12" height="12"><use href="#i-check"/></svg></span>
-            <span><strong>Change the interface.</strong> Every screen is React and TypeScript in one repository.</span>
+            <span><strong>Run Max from source.</strong> Clone the repository, install dependencies and start the app.</span>
           </li>
           <li>
             <span class="open-pitch-mark" aria-hidden="true"><svg width="12" height="12"><use href="#i-check"/></svg></span>
-            <span><strong>Write your own workspace.</strong> A blueprint is JSON you can export, edit and import back.</span>
+            <span><strong>Reuse your workspace structure.</strong> Export a blueprint, edit it and import it into another workspace.</span>
           </li>
           <li>
             <span class="open-pitch-mark" aria-hidden="true"><svg width="12" height="12"><use href="#i-check"/></svg></span>
-            <span><strong>Ship your own build.</strong> One command makes the installer for your platform.</span>
+            <span><strong>One command makes an installer</strong> for whichever platform you run it on.</span>
           </li>
         </ul>
         <div class="open-pitch-footer">
@@ -341,8 +343,8 @@
 
 <section id="download" class="sec-cta">
   <div class="container cta-inner">
-    <h2 class="display cta-title">Your work keeps going when the internet does not.</h2>
-    <p class="cta-sub">Max is free software. Install it, import a blueprint or start from an empty page, and keep the workspace on your own machine.</p>
+    <h2 class="display cta-title">Start your workspace.</h2>
+    <p class="cta-sub">Free and open source. Available for Windows, macOS and Linux.</p>
     <div class="cta-actions">
       <a data-download class="btn btn-primary btn-lg" href="https://github.com/omar-Suleiman14/max/releases/latest">
         <svg class="dl-icon dl-icon--windows" aria-hidden="true"><use href="#i-windows"/></svg>

@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex">
+<title>Max — workspace map (hero render source)</title>
+<style>
+  :root {
+    --app-bg: #121212;
+    --panel: #181818;
+    --sidebar: #161616;
+    --line: #ffffff14;
+    --line-soft: #ffffff0d;
+    --fg: #f4f4f5;
+    --fg-muted: #9b9a97;
+    --fg-dim: #73726e;
+    --accent: #3595e3;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1440px; height: 900px; overflow: hidden; }
+  body {
+    background: var(--app-bg);
+    color: var(--fg);
+    font-family: -apple-system, 'Helvetica Neue', 'Segoe UI', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: 13px;
+  }
+  .app { display: grid; grid-template-columns: 232px 1fr; width: 1440px; height: 900px; }
+
+  /* Sidebar */
+  .sidebar { display: flex; flex-direction: column; background: var(--sidebar); border-right: 1px solid var(--line); }
+  .side-top { display: flex; align-items: center; gap: 9px; padding: 14px 14px 10px; }
+  .side-top img { width: 32px; height: 32px; }
+  .side-name { font-size: 13px; font-weight: 600; letter-spacing: -.01em; }
+  .side-collapse { margin-left: auto; color: var(--fg-dim); }
+  .side-scroll { flex: 1; padding: 4px 10px; display: flex; flex-direction: column; gap: 2px; }
+  .side-label {
+    margin: 14px 0 6px 6px; font-size: 10px; font-weight: 600; letter-spacing: 0;
+    text-transform: none; color: var(--fg-dim);
+  }
+  .side-label:first-child { margin-top: 2px; }
+  .item {
+    display: flex; align-items: center; gap: 9px; height: 29px;
+    padding: 0 8px; border-radius: 7px; color: #cfcfd6; font-size: 13px; letter-spacing: -.006em;
+  }
+  .glyph { width: 16px; height: 16px; flex: none; }
+  .item.is-active { background: #ffffff0f; color: #fff; font-weight: 500; }
+  .item .count { margin-left: auto; font-size: 11px; color: var(--fg-dim); font-variant-numeric: tabular-nums; }
+  .side-new {
+    display: flex; align-items: center; gap: 8px; height: 30px; margin: 10px 0 0;
+    padding: 0 8px; border: 1px dashed #ffffff1f; border-radius: 7px; color: var(--fg-dim); font-size: 13px;
+  }
+  .side-foot {
+    display: flex; align-items: center; gap: 9px; padding: 12px 18px 14px;
+    border-top: 1px solid var(--line); color: var(--fg-muted); font-size: 13px;
+  }
+  .kbd {
+    display: inline-flex; align-items: center; justify-content: center; min-width: 20px; height: 18px;
+    padding: 0 5px; border: 1px solid var(--line); border-radius: 5px;
+    background: #ffffff08; color: var(--fg-dim); font-size: 10.5px; letter-spacing: .02em;
+  }
+  .side-foot .kbd { margin-left: auto; }
+
+  /* Top bar */
+  .main { display: flex; flex-direction: column; min-width: 0; }
+  .topbar { display: flex; align-items: center; gap: 12px; height: 52px; padding: 0 16px 0 14px; border-bottom: 1px solid var(--line); }
+  .nav-arrows { display: flex; gap: 2px; color: var(--fg-dim); }
+  .crumb { display: flex; align-items: center; gap: 7px; font-size: 13px; color: var(--fg-dim); letter-spacing: -.006em; }
+  .crumb b { color: var(--fg); font-weight: 600; }
+  .top-actions { display: flex; align-items: center; gap: 6px; margin-left: auto; }
+  .taction {
+    display: inline-flex; align-items: center; gap: 8px; height: 30px; padding: 0 9px 0 10px;
+    border: 1px solid var(--line); border-radius: 8px; background: #ffffff06; color: var(--fg-muted); font-size: 12.5px;
+  }
+  .taction.is-on { background: #ffffff14; border-color: #ffffff2b; color: #fff; }
+  .taction svg { color: inherit; opacity: .9; }
+
+  /* Canvas */
+  .canvas { position: relative; flex: 1; overflow: hidden; background: #121212; }
+  .canvas svg.graph { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+  .chip {
+    position: absolute; left: 22px; top: 20px; display: inline-flex; align-items: center; gap: 10px;
+    height: 40px; padding: 0 16px 0 12px; border: 1px solid var(--line); border-radius: 11px;
+    background: #12121680; backdrop-filter: blur(12px);
+  }
+  .chip .chip-title { font-size: 14px; font-weight: 600; letter-spacing: -.012em; }
+  .chip .chip-meta { font-size: 12px; color: var(--fg-dim); font-variant-numeric: tabular-nums; }
+
+  .finder { position: absolute; right: 74px; top: 20px; width: 258px; }
+  .finder .field {
+    display: flex; align-items: center; gap: 9px; height: 36px; padding: 0 12px;
+    border: 1px solid var(--line); border-radius: 9px; background: #101014cc; color: var(--fg-dim); font-size: 12.5px;
+  }
+  .opts-btn {
+    position: absolute; right: 22px; top: 20px; display: flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px; border: 1px solid #ffffff2b; border-radius: 9px; background: #ffffff12; color: #fff;
+  }
+
+  .panel {
+    position: absolute; right: 22px; top: 64px; width: 320px; padding: 14px;
+    border: 1px solid var(--line); border-radius: 13px; background: #181818e6;
+    box-shadow: 0 24px 60px -24px #000000d9; backdrop-filter: blur(16px);
+  }
+  .panel-head { display: flex; align-items: center; margin-bottom: 14px; }
+  .panel-head h2 { font-size: 13.5px; font-weight: 600; letter-spacing: -.01em; }
+  .panel-head .x { margin-left: auto; color: var(--fg-dim); }
+  .panel h3 { margin: 0 0 8px; font-size: 12.5px; font-weight: 600; color: #e7e7ea; }
+  .panel .input {
+    display: flex; align-items: center; height: 32px; padding: 0 10px; border: 1px solid var(--line);
+    border-radius: 8px; background: #ffffff08; color: var(--fg-dim); font-size: 11.5px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: -.02em; white-space: nowrap; overflow: hidden;
+  }
+  .panel .hint { margin: 8px 0 14px; font-size: 11.5px; line-height: 1.45; color: var(--fg-dim); }
+  .toggle-row { display: flex; align-items: center; height: 30px; font-size: 12.5px; color: #dcdce1; }
+  .switch { margin-left: auto; width: 34px; height: 19px; border-radius: 999px; background: #ffffff1a; position: relative; }
+  .switch i { position: absolute; top: 2.5px; left: 2.5px; width: 14px; height: 14px; border-radius: 50%; background: #8f8f99; }
+  .switch.on { background: var(--accent); }
+  .switch.on i { left: auto; right: 2.5px; background: #fff; }
+  .group-head { display: flex; align-items: center; margin: 16px 0 6px; }
+  .group-head h3 { margin: 0; }
+  .group-head .plus { margin-left: auto; color: var(--fg-muted); }
+  .rows { display: flex; flex-direction: column; gap: 7px; margin-top: 10px; }
+  .row { display: grid; grid-template-columns: 90px minmax(0,1fr) 90px 20px; align-items: center; gap: 6px; }
+  .sel {
+    display: flex; align-items: center; gap: 6px; height: 29px; padding: 0 8px; border: 1px solid var(--line);
+    border-radius: 7px; background: #ffffff08; font-size: 12px; color: #dcdce1;
+  }
+  .sel .caret { margin-left: auto; color: var(--fg-dim); }
+  .sel .dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+  .sel.term { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11.5px; color: #b9b9c1; justify-content: center; padding: 0 4px; }
+  .row .rm { color: #5c5c65; display: flex; justify-content: center; }
+
+  .hintbar { position: absolute; left: 24px; bottom: 18px; font-size: 12px; color: var(--fg-dim); }
+  .zoom {
+    position: absolute; right: 22px; bottom: 18px; display: flex; align-items: center; gap: 4px;
+    height: 36px; padding: 0 8px; border: 1px solid var(--line); border-radius: 10px; background: #101014cc;
+    color: var(--fg-muted); font-size: 12px;
+  }
+  .zoom .pct { min-width: 38px; text-align: center; color: #dcdce1; font-variant-numeric: tabular-nums; }
+  .zoom span.sep { width: 1px; height: 18px; background: var(--line); margin: 0 4px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <symbol id="g-page" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/>
+  </symbol>
+  <symbol id="g-table" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M10 10v10"/>
+  </symbol>
+  <symbol id="g-graph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="2.4"/><circle cx="5" cy="6" r="1.9"/><circle cx="19" cy="6.5" r="1.9"/><circle cx="6" cy="18.5" r="1.9"/><circle cx="18" cy="18" r="1.9"/>
+    <path d="m6.5 7.3 3.6 3.2M17.4 8 14 10.6M10.3 13.6 7.5 16.9M13.8 13.6l2.8 3"/>
+  </symbol>
+  <symbol id="g-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></symbol>
+  <symbol id="g-zap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></symbol>
+  <symbol id="g-sliders" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h10M18 7h2M4 17h4M12 17h8M16 5v4M8 15v4"/></symbol>
+  <symbol id="g-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-2.9 1.2 2 2 0 1 1-4 0 1.7 1.7 0 0 0-2.9-1.2l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1A1.7 1.7 0 0 0 3 15a2 2 0 1 1 0-4 1.7 1.7 0 0 0 1.2-2.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1A1.7 1.7 0 0 0 10 4.6a2 2 0 1 1 4 0 1.7 1.7 0 0 0 2.9 1.2l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1A1.7 1.7 0 0 0 21 11a2 2 0 1 1 0 4Z"/></symbol>
+  <symbol id="g-collapse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16"/></symbol>
+  <symbol id="g-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5 8 12l7 7"/></symbol>
+  <symbol id="g-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></symbol>
+  <symbol id="g-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="g-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+  <symbol id="g-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="g-minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M5 12h14"/></symbol>
+  <symbol id="g-expand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4H4v5M15 20h5v-5M20 9V4h-5M4 15v5h5"/></symbol>
+</defs></svg>
+
+<div class="app">
+  <aside class="sidebar">
+    <div class="side-top">
+      <img src="../assets/max-mark.png" alt="">
+      <svg class="side-collapse" width="16" height="16"><use href="#g-collapse"/></svg>
+    </div>
+    <div class="side-scroll" id="side-scroll"></div>
+    <div class="side-foot">
+      <svg width="16" height="16"><use href="#g-gear"/></svg>
+      Settings
+      <span class="kbd">Ctrl ,</span>
+    </div>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="nav-arrows">
+        <svg width="17" height="17"><use href="#g-left"/></svg>
+        <svg width="17" height="17"><use href="#g-right"/></svg>
+      </div>
+      <div class="crumb">Design workspace <span>/</span> <b>Overview</b></div>
+      <div class="top-actions">
+        <span class="taction is-on"><svg width="15" height="15"><use href="#g-graph"/></svg> Graph <span class="kbd">Ctrl G</span></span>
+        <span class="taction"><svg width="15" height="15"><use href="#g-search"/></svg> Search <span class="kbd">Ctrl K</span></span>
+      </div>
+    </div>
+
+    <div class="canvas">
+      <svg class="graph" id="graph" viewBox="0 0 1208 848" preserveAspectRatio="none"></svg>
+
+      <div class="chip">
+        <svg width="17" height="17" style="color:#c8c8d0"><use href="#g-graph"/></svg>
+        <span class="chip-title">Page graph</span>
+        <span class="chip-meta" id="chip-meta">—</span>
+      </div>
+
+      <div class="finder"><div class="field"><svg width="14" height="14"><use href="#g-search"/></svg> Find a page…</div></div>
+      <div class="opts-btn"><svg width="17" height="17"><use href="#g-sliders"/></svg></div>
+
+      <div class="panel">
+        <div class="panel-head">
+          <h2>Graph options</h2>
+          <svg class="x" width="15" height="15"><use href="#g-x"/></svg>
+        </div>
+        <h3>Filter pages</h3>
+        <div class="input">property:Status=Active  path:"Projects"  -tag:archived</div>
+        <p class="hint">Use AND, OR, or - to exclude. Fields: file, path, text, property, tag.</p>
+        <div class="toggle-row">Unlinked pages <span class="switch on"><i></i></span></div>
+        <div class="toggle-row">Page labels <span class="switch on"><i></i></span></div>
+        <div class="group-head">
+          <h3>Color groups</h3>
+          <svg class="plus" width="15" height="15"><use href="#g-plus"/></svg>
+        </div>
+        <p class="hint" style="margin:0">Match a name, path, text, or property value. A group overrides the page icon color.</p>
+        <div class="rows" id="rows"></div>
+      </div>
+
+      <div class="hintbar">Drag to pan · Scroll to zoom · Click a page to open</div>
+      <div class="zoom">
+        <svg width="15" height="15"><use href="#g-minus"/></svg>
+        <span class="pct">38%</span>
+        <svg width="15" height="15"><use href="#g-plus"/></svg>
+        <span class="sep"></span>
+        <svg width="15" height="15"><use href="#g-expand"/></svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* Deterministic mockup of the Max workspace map, rendered once and captured as
+   assets/app-graph.png. Everything below is layout only: a seeded RNG, a small
+   force simulation, and the SVG it produces. */
+const rng = (seed => () => (seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296)(20260913);
+const rand = (a, b) => a + (b - a) * rng();
+const pick = (arr) => arr[Math.floor(rng() * arr.length)];
+
+const GROUPS = [
+  { key: 'sale', name: 'Sales & Transactions', colour: 'Red',    hex: '#ef8b86', term: 'sale',  count: 48,
+    pages: ['Invoices', 'Orders', 'Refunds', 'Receipts', 'Discounts'] },
+  { key: 'inv',  name: 'Inventory',            colour: 'Green',  hex: '#86d3a5', term: 'inv',   count: 44,
+    pages: ['Stock counts', 'SKUs', 'Shelving', 'Restock'] },
+  { key: 'cli',  name: 'Clients',              colour: 'Purple', hex: '#c8a2ec', term: 'cli',   count: 36,
+    pages: ['Companies', 'Contacts', 'Contracts'] },
+  { key: 'acc',  name: 'Accounts',             colour: 'Blue',   hex: '#7fb2ea', term: 'acc',   count: 32,
+    pages: ['Ledger', 'Expenses', 'Tax', 'Payouts'] },
+  { key: 'rep',  name: 'Repairs',              colour: 'Orange', hex: '#eeb173', term: 'rep',   count: 28,
+    pages: ['Tickets', 'Warranty', 'Parts'] },
+  { key: 'sup',  name: 'Suppliers',            colour: 'Teal',   hex: '#63c8bd', term: 'sup',   count: 24,
+    pages: ['Purchase orders', 'Lead times'] },
+  { key: 'prj',  name: 'Projects',             colour: 'Indigo', hex: '#9b9cf0', term: 'proj',  count: 26,
+    pages: ['Roadmap', 'Sprints', 'Briefs'] },
+  { key: 'team', name: 'Team',                 colour: 'Cyan',   hex: '#68cdea', term: 'team',  count: 20,
+    pages: ['Shifts', 'Payroll'] },
+  { key: 'day',  name: 'Daily Close',          colour: 'Amber',  hex: '#e0c473', term: 'close', count: 18,
+    pages: ['Cash count', 'Till log'] },
+  { key: 'svc',  name: 'Services & Fees',      colour: 'Pink',   hex: '#ef9dc4', term: 'svc',   count: 16,
+    pages: ['Price list', 'Callouts'] },
+  { key: 'misc', name: 'Notes',                colour: 'Grey',   hex: '#9c9ca6', term: '',      count: 26,
+    pages: ['Scratch', 'Imports'] },
+];
+
+/* Cluster anchors, in the 1208 x 848 canvas space. The right column is kept
+   clear of the options panel, and the centre carries the cross-links. */
+const ANCHORS = {
+  sale: [604, 424],
+  inv: [604, 124], sup: [851, 181], day: [1003, 331], rep: [1003, 517], acc: [851, 667],
+  svc: [604, 724], prj: [357, 667], misc: [205, 517], team: [205, 331], cli: [357, 181],
+};
+
+const nodes = [], edges = [];
+GROUPS.forEach((g, gi) => {
+  const [ax, ay] = ANCHORS[g.key];
+  const hub = nodes.length;
+  nodes.push({ g: gi, x: ax, y: ay, vx: 0, vy: 0, r: 10.5, hub: true, label: g.name.split(' & ')[0] });
+  const kids = [];
+  for (let i = 0; i < g.count; i++) {
+    const lead = i < g.pages.length;
+    kids.push(nodes.length);
+    nodes.push({
+      g: gi,
+      x: ax + rand(-70, 70), y: ay + rand(-70, 70), vx: 0, vy: 0,
+      r: lead ? rand(6, 7.6) : rand(3.1, 5.2),
+      hub: false,
+      label: lead ? g.pages[i] : null,
+    });
+  }
+  kids.forEach((k, i) => {
+    if (i < 6 || rng() < 0.55) edges.push([hub, k]);
+    const links = 2 + Math.floor(rng() * 3);
+    for (let l = 0; l < links; l++) {
+      const other = pick(kids);
+      if (other !== k) edges.push([k, other]);
+    }
+  });
+});
+
+/* Cross-group links: hubs wired to each other, plus loose page-to-page threads
+   so the clusters read as one workspace rather than eleven islands. */
+const hubs = nodes.map((n, i) => (n.hub ? i : -1)).filter((i) => i >= 0);
+hubs.forEach((h, i) => {
+  edges.push([h, hubs[(i + 1) % hubs.length]]);
+  edges.push([h, hubs[(i + 4) % hubs.length]]);
+});
+for (let i = 0; i < 150; i++) {
+  const a = Math.floor(rng() * nodes.length), b = Math.floor(rng() * nodes.length);
+  if (nodes[a].g !== nodes[b].g) edges.push([a, b]);
+}
+
+const seen = new Set();
+const links = edges.filter(([a, b]) => {
+  const key = a < b ? `${a}:${b}` : `${b}:${a}`;
+  if (a === b || seen.has(key)) return false;
+  seen.add(key);
+  return true;
+});
+
+/* Spring-electric layout: repulsion between every pair, springs along links,
+   and a light pull towards each group's anchor to keep the lobes apart. */
+const K = 44;
+for (let step = 0; step < 320; step++) {
+  const heat = 14 * (1 - step / 320) + 0.6;
+  for (let i = 0; i < nodes.length; i++) {
+    const a = nodes[i];
+    for (let j = i + 1; j < nodes.length; j++) {
+      const b = nodes[j];
+      let dx = a.x - b.x, dy = a.y - b.y;
+      let d2 = dx * dx + dy * dy;
+      if (d2 < 1) { dx = rand(-1, 1); dy = rand(-1, 1); d2 = 1; }
+      const d = Math.sqrt(d2);
+      const near = nodes[i].g === nodes[j].g ? 1 : 1.9;
+      const f = (near * K * K) / d2;
+      a.vx += (dx / d) * f; a.vy += (dy / d) * f;
+      b.vx -= (dx / d) * f; b.vy -= (dy / d) * f;
+    }
+  }
+  links.forEach(([i, j]) => {
+    const a = nodes[i], b = nodes[j];
+    const dx = b.x - a.x, dy = b.y - a.y;
+    const d = Math.max(Math.hypot(dx, dy), 0.01);
+    const f = (d * d) / (K * (a.g === b.g ? 34 : 12));
+    a.vx += (dx / d) * f; a.vy += (dy / d) * f;
+    b.vx -= (dx / d) * f; b.vy -= (dy / d) * f;
+  });
+  nodes.forEach((n) => {
+    const [ax, ay] = ANCHORS[GROUPS[n.g].key];
+    n.vx += (ax - n.x) * 0.035; n.vy += (ay - n.y) * 0.035;
+    const speed = Math.hypot(n.vx, n.vy) || 1;
+    const cap = Math.min(speed, heat);
+    n.x += (n.vx / speed) * cap; n.y += (n.vy / speed) * cap;
+    n.vx *= 0.06; n.vy *= 0.06;
+  });
+}
+
+/* Fit the drawing into the free area of the canvas. */
+const pad = { l: 70, r: 352, t: 78, b: 76 };
+const xs = nodes.map((n) => n.x), ys = nodes.map((n) => n.y);
+const minX = Math.min(...xs), maxX = Math.max(...xs), minY = Math.min(...ys), maxY = Math.max(...ys);
+const scale = Math.min((1208 - pad.l - pad.r) / (maxX - minX), (848 - pad.t - pad.b) / (maxY - minY));
+const offX = pad.l + ((1208 - pad.l - pad.r) - (maxX - minX) * scale) / 2;
+const offY = pad.t + ((848 - pad.t - pad.b) - (maxY - minY) * scale) / 2;
+nodes.forEach((n) => {
+  n.x = offX + (n.x - minX) * scale;
+  n.y = offY + (n.y - minY) * scale;
+});
+
+const svgns = 'http://www.w3.org/2000/svg';
+const el = (name, attrs) => {
+  const node = document.createElementNS(svgns, name);
+  for (const k in attrs) node.setAttribute(k, attrs[k]);
+  return node;
+};
+const graph = document.getElementById('graph');
+const gLinks = el('g', {}), gNodes = el('g', {}), gLabels = el('g', {});
+
+links.forEach(([i, j]) => {
+  const a = nodes[i], b = nodes[j];
+  const cross = a.g !== b.g;
+  const colour = '#9b9a97';
+  gLinks.appendChild(el('line', {
+    x1: a.x.toFixed(1), y1: a.y.toFixed(1), x2: b.x.toFixed(1), y2: b.y.toFixed(1),
+    stroke: colour,
+    'stroke-width': 1,
+    'stroke-opacity': 0.25,
+  }));
+});
+
+nodes.forEach((n) => {
+  const hex = GROUPS[n.g].hex;
+  gNodes.appendChild(el('circle', {
+    cx: n.x.toFixed(1), cy: n.y.toFixed(1), r: n.r.toFixed(1),
+    fill: hex, 'fill-opacity': n.hub ? 0.95 : 0.82,
+    stroke: '#121212', 'stroke-width': 2,
+  }));
+});
+
+/* Labels go on in importance order, and any that would sit on top of one
+   already placed is dropped, so the map stays readable at hero size. */
+const placed = [];
+nodes
+  .filter((n) => n.label)
+  .sort((a, b) => (b.hub - a.hub) || (b.r - a.r))
+  .forEach((n) => {
+    const size = n.hub ? 12.5 : 10.5;
+    const w = n.label.length * size * 0.54, h = size * 1.5;
+    const below = n.r + (n.hub ? 15 : 12);
+    const spots = n.hub
+      ? [[0, below], [0, -n.r - 8], [w / 2 + n.r + 8, 4], [-w / 2 - n.r - 8, 4]]
+      : [[0, below], [0, -n.r - 8]];
+    const spot = spots
+      .map(([dx, dy]) => ({ cx: n.x + dx, cy: n.y + dy }))
+      .find(({ cx, cy }) => {
+        const box = { x1: cx - w / 2 - 5, x2: cx + w / 2 + 5, y1: cy - h, y2: cy + 5 };
+        if (box.x1 < 14 || box.x2 > 900) return false;
+        return !placed.some((q) => box.x1 < q.x2 && box.x2 > q.x1 && box.y1 < q.y2 && box.y2 > q.y1);
+      });
+    if (!spot) return;
+    const { cx, cy } = spot;
+    placed.push({ x1: cx - w / 2 - 5, x2: cx + w / 2 + 5, y1: cy - h, y2: cy + 5 });
+    const text = el('text', {
+      x: cx.toFixed(1), y: cy.toFixed(1),
+      'text-anchor': 'middle',
+      'font-size': size,
+      'font-weight': n.hub ? 600 : 500,
+      fill: n.hub ? '#f1f1f4' : '#bdbdc6',
+      stroke: '#121212', 'stroke-width': 3.4, 'paint-order': 'stroke',
+      'letter-spacing': '-0.01em',
+    });
+    text.textContent = n.label;
+    gLabels.appendChild(text);
+  });
+
+graph.append(gLinks, gNodes, gLabels);
+document.getElementById('chip-meta').textContent =
+  `${nodes.length} pages · ${links.length.toLocaleString('en-US')} links`;
+
+/* Sidebar and colour-group rows are built from the same list, so a page's icon
+   in the sidebar is always the colour its nodes have in the graph. */
+const pageGlyph = (hex) => `
+  <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="${hex}" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" fill="${hex}" fill-opacity=".16"/>
+    <path d="M14 3v5h5M9 13.5h6M9 17h4"/>
+  </svg>`;
+
+document.getElementById('side-scroll').innerHTML = `
+  <div class="side-label">Workspace</div>
+  <div class="item is-active">${pageGlyph('#d6d6dd')} Overview</div>
+  ${GROUPS.filter((g) => g.key !== 'misc').map((g) => `
+    <div class="item">${pageGlyph(g.hex)} ${g.name}</div>`).join('')}
+  <div class="side-new"><svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><use href="#g-plus"/></svg> New page</div>`;
+
+document.getElementById('rows').innerHTML = GROUPS.filter((g) => g.term).slice(0, 5).map((g) => `
+  <div class="row">
+    <span class="sel">Path <svg class="caret" width="12" height="12"><use href="#g-caret"/></svg></span>
+    <span class="sel term">${g.term}</span>
+    <span class="sel"><i class="dot" style="background:${g.hex}"></i> ${g.colour} <svg class="caret" width="12" height="12"><use href="#g-caret"/></svg></span>
+    <span class="rm"><svg width="12" height="12"><use href="#g-x"/></svg></span>
+  </div>`).join('');
+
+document.title = 'ready';
+</script>
+</body>
+</html>

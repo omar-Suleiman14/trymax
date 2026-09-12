@@ -2,7 +2,8 @@
 
 A static site: two HTML pages, one stylesheet, one script. There is no build
 step and no framework, so the deployed output is exactly what is in this
-directory.
+directory. `tools/` holds the source of the hero image and is not linked from
+anywhere in the site.
 
 ## Local preview
 
@@ -26,6 +27,32 @@ Import this repository and set:
 caches `/assets` for a year. The current domain is `trymax.vercel.app`; when
 `trymax.sh` is attached, update the canonical and Open Graph URLs in
 `index.html` and `download.html`.
+
+## Images
+
+`tools/app-graph.html` is the source of the hero image. It is a self-contained
+mockup of the Max workspace map: a seeded layout, so re-rendering it produces
+the same picture. Render and re-encode it with:
+
+```sh
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+  --headless --hide-scrollbars --force-device-scale-factor=1.5 \
+  --window-size=1440,900 --virtual-time-budget=6000 \
+  --screenshot=/tmp/hero.png --allow-file-access-from-files \
+  file://$PWD/tools/app-graph.html
+
+cwebp -q 90 -m 6 /tmp/hero.png -o assets/app-graph.webp   # what the page loads
+sips -Z 1200 /tmp/hero.png --out assets/app-graph.png     # what crawlers load
+```
+
+The page uses the WebP. The PNG stays because some social crawlers still do not
+read WebP, and an Open Graph card is never shown wider than 1200px.
+
+Favicons are built from the complete `assets/max-mark.png` with
+`python tools/build-icons.py` (requires Pillow). The mark is centered on a dark
+square with padding. PNG icons are provided at 32, 192 and 512px, Apple touch
+icons at 180px, and ICO files at 16–256px. Root `/favicon.ico` and
+`/apple-touch-icon.png` also support clients that discover icons without HTML.
 
 ## Download buttons
 
