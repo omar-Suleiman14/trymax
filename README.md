@@ -82,3 +82,57 @@ same release, so publishing a release is the only step needed to update it.
 
 Mac downloads select the Apple silicon DMG, never the ZIP update archive or
 an Intel installer. If it is missing, the button opens the latest release.
+
+## Analytics
+
+`analytics.js` loads PostHog and captures the handful of events that say whether
+a visitor ended up wanting Max. The project and host it writes to are the two
+constants at the top of the file:
+
+```js
+const PROJECT_KEY = 'phc_...';                  // public: it can only write events
+const API_HOST = 'https://us.i.posthog.com';   // eu.i.posthog.com for an EU project
+```
+
+On `localhost` and `file://`, and if the key is ever replaced by a placeholder,
+the script returns before loading anything, so local preview never writes to the
+project.
+
+Pageviews, clicks, referrers and UTM parameters are PostHog's job: autocapture
+and Web Analytics record them without any code here. Session replay has to be
+switched on in the project settings; inputs are masked, and the site has no
+forms. Do Not Track is honoured: a browser that sends the header is not counted
+at all, which undercounts traffic on purpose, because Max keeps a workspace on
+the visitor's own computer and the site should not argue with that request.
+
+These are the events the site sends itself:
+
+| Event | Properties | Answers |
+| --- | --- | --- |
+| `download_clicked` | `platform`, `asset`, `platform_source`, `location`, `version` | The conversion. Which section sent people to a download, and which build they took |
+| `download_platform_selected` | `platform`, `location` | Demand per platform, from the download page rows a visitor picked by hand |
+| `github_clicked` | `destination`, `location` | Interest in the source: `repo`, `releases`, `fork` or `license` |
+| `cta_clicked` | `label`, `href`, `location` | The non-download routes people take, mainly nav and footer links to `/download` |
+
+`location` is the section a click came from, read from the ids already in the
+markup: `hero`, `download` for the closing panel, `open`, `nav`, `footer`, or
+`download-page-row` for a row on `/download`. `platform_source` separates a
+detected platform, where the button offered a build, from a chosen one, where
+the visitor picked a row. `asset` keeps `flatpak` distinct from `linux`, which
+`platform` folds together. `version` is the release the buttons resolved to, so
+downloads can be read per release.
+
+One dashboard covers this: visitors and unique visitors, `download_clicked`
+count, the ratio between them, top sources, `download_clicked` broken down by
+`platform`, and top pages. The funnel worth watching is a pageview of `/` →
+interest, meaning a `github_clicked` or a pageview of `/download` →
+`download_clicked`.
+
+`demo_clicked`, `pricing_viewed` and `contact_clicked` are not wired up because
+the site has no demo, pricing or contact page yet.
+
+## Tests
+
+```sh
+node --test tools/analytics.test.cjs tools/downloads.test.cjs
+```
