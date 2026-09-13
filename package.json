@@ -1,0 +1,17 @@
+{
+  "name": "max-marketing-site",
+  "private": true,
+  "scripts": {
+    "build": "node tools/build.cjs",
+    "lint": "eslint site.js analytics.js tools/*.cjs site.config.cjs",
+    "typecheck": "tsc --allowJs --checkJs --noEmit --lib ES2022,DOM --target ES2022 site.js",
+    "test": "node --test tools/*.test.cjs",
+    "preview": "node tools/serve.cjs"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.0",
+    "eslint": "^9.39.0",
+    "globals": "^16.5.0",
+    "typescript": "^5.9.3"
+  }
+}

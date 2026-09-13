@@ -1,0 +1,18 @@
+{
+  "name": "Max — Offline Desktop Workspace",
+  "short_name": "Max",
+  "icons": [
+    {
+      "src": "/assets/max-icon-192.png?v=20260913-transparent",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/max-icon-512.png?v=20260913-transparent",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#09090b",
+  "background_color": "#09090b"
+}

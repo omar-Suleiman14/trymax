@@ -1,4 +1,4 @@
-const { test } = require('node:test');
+﻿const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const vm = require('node:vm');
 const fs = require('node:fs');
@@ -10,7 +10,7 @@ const source = fs.readFileSync(path.join(__dirname, '../analytics.js'), 'utf8');
 const el = (spec = {}) => ({
   selectors: spec.selectors ?? [],
   ancestors: spec.ancestors ?? {},
-  dataset: spec.dataset ?? {},
+    dataset: spec.dataset ?? { resolved: 'true' },
   href: spec.href ?? '',
   textContent: spec.text ?? '',
   matches(selector) {
@@ -32,7 +32,7 @@ function click(node, { platform = 'mac', version = 'v1.2.3' } = {}, key = 'phc_t
     posthog,
     window: { posthog },
     URL,
-    location: { hostname: 'trymax.sh', protocol: 'https:', href: 'https://trymax.sh/', origin: 'https://trymax.sh' },
+    location: { hostname: 'trymaxnow.vercel.app', protocol: 'https:', href: 'https://trymaxnow.vercel.app/', origin: 'https://trymaxnow.vercel.app' },
     document: {
       documentElement: { dataset: { platform } },
       querySelector: (selector) => (selector === '[data-version]' ? { textContent: version } : null),
@@ -85,7 +85,7 @@ test('GitHub links are named by where they go, not by their URL', () => {
 test('the ghost button to the download page is a CTA, not a download', () => {
   const node = el({
     selectors: ['a[href]', '.btn'],
-    href: 'https://trymax.sh/download',
+    href: 'https://trymaxnow.vercel.app/download',
     text: '  Windows, macOS,\n  Linux ',
     ancestors: { 'section[id]': Object.assign(el(), { id: 'download' }) },
   });
@@ -103,4 +103,10 @@ test('both pages load the analytics script', () => {
   for (const page of ['index.html', 'download.html']) {
     assert.match(fs.readFileSync(path.join(__dirname, '..', page), 'utf8'), /<script src="\/analytics\.js" defer><\/script>/);
   }
+});
+
+
+test('generic desktop CTA is navigation, not an installer download', () => {
+  const node = el({ selectors: ['a[href]', '[data-download]', '.btn'], dataset: {}, href: 'https://trymaxnow.vercel.app/download', text: 'Get Max for desktop', ancestors: { '.hero': el() } });
+  assert.deepEqual(click(node), [['cta_clicked', { label: 'Get Max for desktop', href: '/download', location: 'hero' }]]);
 });

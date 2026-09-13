@@ -3,7 +3,7 @@
   --bg-card: #111113;
   --fg: #fafafa;
   --fg-muted: #a1a1aa;
-  --fg-dim: #71717a;
+  --fg-dim: #8b8b95;
   --border: #ffffff14;
   --border-strong: #ffffff24;
   --accent: #3595e3;
@@ -253,8 +253,7 @@ section { position: relative; padding: 96px 0; border-top: 1px solid var(--borde
 .dl-icon { display: none; flex-shrink: 0; width: 14px; height: 14px; }
 [data-platform='win'] .dl-icon--windows,
 [data-platform='mac'] .dl-icon--apple,
-[data-platform='linux'] .dl-icon--linux,
-html:not([data-platform]) .dl-icon--windows { display: block; }
+[data-platform='linux'] .dl-icon--linux { display: block; }
 
 .hero-preview {
   max-width: 1180px;
@@ -314,7 +313,8 @@ html:not([data-platform]) .dl-icon--windows { display: block; }
 
 .marquee-group { display: flex; gap: 12px; padding-right: 12px; }
 .marquee-row.is-reverse .marquee-track { animation-duration: 84s; animation-direction: reverse; }
-.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track { animation-play-state: paused; }
 
 @keyframes marquee {
   from { transform: translateX(0); }
@@ -323,6 +323,9 @@ html:not([data-platform]) .dl-icon--windows { display: block; }
 
 @media (prefers-reduced-motion: reduce) {
   .marquee-track { animation: none; }
+  .marquee-row { overflow-x: auto; }
+  .marquee-group[aria-hidden] { display: none; }
+  html { scroll-behavior: auto; }
 }
 
 .primitive-card {
@@ -651,3 +654,15 @@ html:not([data-platform]) .dl-icon--windows { display: block; }
   .local-cell:nth-child(n + 5) { border-bottom: 1px solid var(--border); }
   .local-cell:last-child { border-bottom: 0; }
 }
+
+/* Local-data explanation uses the site's existing type, borders and spacing. */
+.portability { margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--border); }
+.portability h3 { font-size: 22px; font-weight: 500; margin-bottom: 20px; }
+.portability-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.portability dt { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+.portability dd { color: var(--fg-muted); font-size: 15px; line-height: 1.6; }
+.skip-link { position: fixed; top: 8px; left: 8px; z-index: 100; padding: 10px 16px; background: var(--fg); color: var(--bg); transform: translateY(-160%); }
+.skip-link:focus { transform: translateY(0); }
+.dl-row-meta { min-height: 1.5em; overflow-wrap: anywhere; }
+.dl-note a { text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 640px) { .portability-grid { grid-template-columns: 1fr; gap: 20px; } }

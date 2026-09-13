@@ -3,19 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Pages, databases and linked records in a desktop workspace. Saved on your computer. Works offline.">
-<link rel="canonical" href="https://trymax.vercel.app/">
+<!-- SEO:START -->
+<title>Max — Offline Desktop Workspace for Notes, Databases &amp; Workflows</title>
+<meta name="description" content="Max is a local-first desktop workspace for notes, databases, forms and workflows. Work offline, reuse workspace blueprints and back up your data.">
+<link rel="canonical" href="https://trymaxnow.vercel.app/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Max">
-<meta property="og:url" content="https://trymax.vercel.app/">
-<meta property="og:title" content="Max">
-<meta property="og:description" content="Pages, databases and linked records in a desktop workspace. Saved on your computer. Works offline.">
-<meta property="og:image" content="https://trymax.vercel.app/assets/app-graph.png?v=20260913-3">
-<meta property="og:image:alt" content="The Max desktop app showing a workspace drawn as a graph of linked pages.">
+<meta property="og:url" content="https://trymaxnow.vercel.app/">
+<meta property="og:title" content="Max — Offline Desktop Workspace for Notes, Databases &amp; Workflows">
+<meta property="og:description" content="Max is a local-first desktop workspace for notes, databases, forms and workflows. Work offline, reuse workspace blueprints and back up your data.">
+<meta property="og:image" content="https://trymaxnow.vercel.app/assets/app-graph.png?v=20260913-3">
+<meta property="og:image:alt" content="Max desktop workspace showing a graph of linked pages, colour groups and filters.">
+<meta name="twitter:title" content="Max — Offline Desktop Workspace for Notes, Databases &amp; Workflows">
+<meta name="twitter:description" content="Max is a local-first desktop workspace for notes, databases, forms and workflows. Work offline, reuse workspace blueprints and back up your data.">
+<meta name="twitter:image" content="https://trymaxnow.vercel.app/assets/app-graph.png?v=20260913-3">
+<meta name="twitter:image:alt" content="Max desktop workspace showing a graph of linked pages, colour groups and filters.">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Max">
-<meta name="twitter:description" content="Pages, databases and linked records in a desktop workspace. Saved on your computer. Works offline.">
-<meta name="twitter:image" content="https://trymax.vercel.app/assets/app-graph.png?v=20260913-3">
+<meta name="theme-color" content="#09090b">
+<link rel="manifest" href="/site.webmanifest">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://trymaxnow.vercel.app/#website","name":"Max","url":"https://trymaxnow.vercel.app/","description":"Max is a local-first desktop workspace for notes, databases, forms and workflows. Work offline, reuse workspace blueprints and back up your data."},{"@type":"SoftwareApplication","@id":"https://trymaxnow.vercel.app/#software","name":"Max","url":"https://trymaxnow.vercel.app/","description":"Max is a local-first desktop workspace for notes, databases, forms and workflows. Work offline, reuse workspace blueprints and back up your data.","applicationCategory":"BusinessApplication","operatingSystem":["Windows (x64)","macOS (Apple silicon)","Linux (x64)"],"downloadUrl":"https://trymaxnow.vercel.app/download","inLanguage":["en","ar"],"license":"https://github.com/omar-Suleiman14/max/blob/main/LICENSE"}]}</script>
+<!-- SEO:END -->
 <link rel="icon" href="/favicon.ico?v=20260913-transparent" sizes="16x16 24x24 32x32 48x48 64x64 128x128 256x256">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/max-icon-32.png?v=20260913-transparent">
 <link rel="icon" type="image/png" sizes="192x192" href="/assets/max-icon-192.png?v=20260913-transparent">
@@ -23,11 +30,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;650&family=JetBrains+Mono:wght@400;500&display=swap">
-<title>Max</title>
 <link rel="stylesheet" href="/styles.css">
 <script src="/analytics.js" defer></script>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <defs>
     <symbol id="i-github" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7 0-.7 0-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C16.9 4.9 18 5.2 18 5.2c.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"/></symbol>
@@ -57,41 +64,41 @@
       <a class="nav-link" href="/download">Download</a>
       <a class="nav-pill" href="https://github.com/omar-Suleiman14/max/releases/latest" target="_blank" rel="noopener noreferrer">
         <svg width="14" height="14" aria-hidden="true"><use href="#i-github"/></svg>
-        <span><strong data-version>v0.4.3</strong> on GitHub</span>
+        <span><strong data-version>Latest release</strong> on GitHub</span>
       </a>
     </div>
   </div>
 </nav>
 
-<main class="main">
+<main id="main" class="main">
 
 <section class="hero">
   <div class="hero-grid" aria-hidden="true"></div>
   <div class="container hero-inner">
     <h1 class="hero-title display">
-      <span data-rise>Your whole workspace</span><br>
-      <span data-rise style="--d:90ms">is one file on</span><br>
-      <span data-rise style="--d:180ms">your own computer.</span>
+      <span data-rise>Your workspace</span><br>
+      <span data-rise style="--d:90ms">lives on</span><br>
+      <span data-rise style="--d:180ms">your computer.</span>
     </h1>
-    <p class="hero-sub" data-rise style="--d:300ms">Keep notes, manage records and connect your work. Max saves everything on your computer and works offline, in Arabic or English.</p>
+    <p class="hero-sub" data-rise style="--d:300ms">Max is an offline desktop workspace for notes, databases, forms and workflows. Your data stays local. Export reusable blueprints of your structure, or back up the whole workspace.</p>
     <div class="hero-actions" data-rise style="--d:400ms">
-      <a data-download class="btn btn-primary btn-lg" href="https://github.com/omar-Suleiman14/max/releases/latest">
+      <a data-download class="btn btn-primary btn-lg" href="/download">
         <svg class="dl-icon dl-icon--windows" aria-hidden="true"><use href="#i-windows"/></svg>
         <svg class="dl-icon dl-icon--apple" aria-hidden="true"><use href="#i-apple"/></svg>
         <svg class="dl-icon dl-icon--linux" aria-hidden="true"><use href="#i-terminal"/></svg>
-        <span data-download-label>Download for Windows</span>
+        <span data-download-label>Get Max for desktop</span>
       </a>
       <a class="hero-source-link" href="https://github.com/omar-Suleiman14/max" target="_blank" rel="noopener noreferrer">
         <svg width="15" height="15" aria-hidden="true"><use href="#i-github"/></svg>
         <span>Read the source</span>
         <svg class="hero-source-arrow" width="12" height="12" aria-hidden="true"><use href="#i-arrow"/></svg>
       </a>
-      <p class="hero-platform-line">Windows, macOS, Debian and Flatpak builds are on the <a href="/download">download page</a>.</p>
+      <p class="hero-platform-line">Available for Windows, macOS and Linux. <a href="/download">View downloads</a> for build details.</p>
     </div>
     <div data-rise style="--d:520ms">
       <div class="hero-preview">
         <figure class="hero-screenshot-frame">
-          <img src="/assets/app-graph.webp?v=20260913-3" alt="The Max desktop app showing a workspace as a graph of linked pages, with colour groups and filters open" width="2160" height="1350" loading="eager" decoding="async">
+          <img src="/assets/app-graph.webp?v=20260913-3" alt="The Max desktop app showing a workspace as a graph of linked pages, with colour groups and filters open" width="2160" height="1350" loading="eager" fetchpriority="high" decoding="async">
         </figure>
       </div>
     </div>
@@ -105,7 +112,7 @@
       <p>Add the fields you need. View the same records as a table, board, list, calendar or gallery.</p>
     </div>
   </div>
-  <div class="marquee" aria-label="What a Max workspace is built from">
+  <div class="marquee" tabindex="0" aria-label="What a Max workspace is built from">
     <div class="marquee-row">
       <div class="marquee-track">
         <div class="marquee-group">
@@ -181,14 +188,14 @@
   <div class="container">
     <div class="section-head">
       <h2>Open Max. Get to work.</h2>
-      <p>No account needed. Your pages, search and graph work offline. Cloud backup is optional.</p>
+      <p>No account needed. Your pages, search and graph work offline, in Arabic or English.</p>
     </div>
     <div class="local-grid">
       <div class="local-cell">
         <div class="local-mark"><svg width="20" height="20" aria-hidden="true"><use href="#i-database"/></svg></div>
         <div>
           <div class="local-name">Saved on your computer</div>
-          <div class="local-tag">One workspace file, easy to copy</div>
+          <div class="local-tag">Workspace data is stored locally</div>
         </div>
       </div>
       <div class="local-cell">
@@ -209,7 +216,7 @@
         <div class="local-mark"><svg width="20" height="20" aria-hidden="true"><use href="#i-archive"/></svg></div>
         <div>
           <div class="local-name">Local backups</div>
-          <div class="local-tag">A safety copy before each restore</div>
+          <div class="local-tag">A complete workspace copy you can restore</div>
         </div>
       </div>
       <div class="local-cell">
@@ -227,9 +234,17 @@
         </div>
       </div>
     </div>
+    <div class="portability" aria-labelledby="portability-title">
+      <h3 id="portability-title">Your data stays local. Your structure stays portable.</h3>
+      <dl class="portability-grid">
+        <div><dt>Data</dt><dd>Your notes, records and workspace data are stored locally on your computer.</dd></div>
+        <div><dt>Blueprint</dt><dd>One portable file containing your workspace structure and configuration. Reuse it elsewhere; it does not contain all your records.</dd></div>
+        <div><dt>Backup</dt><dd>A complete copy of your workspace, including its data, that you can restore.</dd></div>
+      </dl>
+    </div>
     <div class="local-footer">
-      <div class="local-footer-item"><svg width="14" height="14" aria-hidden="true"><use href="#i-check"/></svg> Cloud backup is optional.</div>
-      <div class="local-footer-item"><svg width="14" height="14" aria-hidden="true"><use href="#i-check"/></svg> Copy your workspace to move it between computers.</div>
+      <div class="local-footer-item"><svg width="14" height="14" aria-hidden="true"><use href="#i-check"/></svg> Your data stays on your computer.</div>
+      <div class="local-footer-item"><svg width="14" height="14" aria-hidden="true"><use href="#i-check"/></svg> Use a backup to restore your full workspace.</div>
       <div class="local-footer-item"><svg width="14" height="14" aria-hidden="true"><use href="#i-check"/></svg> Windows, macOS and Linux builds.</div>
     </div>
   </div>
@@ -301,7 +316,7 @@
           <div><span class="prompt">$</span> npm install &amp;&amp; npm run setup:runtime</div>
           <div class="dim">Electron, esbuild and installer runtimes ready</div>
           <div><span class="prompt">$</span> npm start</div>
-          <div class="dim">Max <span class="accent" data-version>v0.4.3</span> running from source</div>
+          <div class="dim">Max <span class="accent" data-version>Latest release</span> running from source</div>
           <div class="cursor"><span class="prompt">$</span><span class="caret"></span></div>
         </div>
       </div>
@@ -313,18 +328,18 @@
           </li>
           <li>
             <span class="open-pitch-mark" aria-hidden="true"><svg width="12" height="12"><use href="#i-check"/></svg></span>
-            <span><strong>Reuse your workspace structure.</strong> Export a blueprint, edit it and import it into another workspace.</span>
+            <span><strong>Reuse your workspace structure.</strong> Export your structure and configuration as a blueprint to reuse in another workspace.</span>
           </li>
           <li>
             <span class="open-pitch-mark" aria-hidden="true"><svg width="12" height="12"><use href="#i-check"/></svg></span>
-            <span><strong>One command makes an installer</strong> for whichever platform you run it on.</span>
+            <span><strong>Build a desktop installer.</strong> Use the repository’s build instructions for Windows, macOS or Linux.</span>
           </li>
         </ul>
         <div class="open-pitch-footer">
           <div class="open-pitch-meta">
             <span>GPL-2.0 licensed</span>
             <span class="meta-sep" aria-hidden="true"></span>
-            <span data-version>v0.4.3</span>
+            <span data-version>Latest release</span>
           </div>
           <div class="open-pitch-actions">
             <a class="btn btn-primary" href="https://github.com/omar-Suleiman14/max/fork" target="_blank" rel="noopener noreferrer">
@@ -347,13 +362,13 @@
     <h2 class="display cta-title">Start your workspace.</h2>
     <p class="cta-sub">Free and open source. Available for Windows, macOS and Linux.</p>
     <div class="cta-actions">
-      <a data-download class="btn btn-primary btn-lg" href="https://github.com/omar-Suleiman14/max/releases/latest">
+      <a data-download class="btn btn-primary btn-lg" href="/download">
         <svg class="dl-icon dl-icon--windows" aria-hidden="true"><use href="#i-windows"/></svg>
         <svg class="dl-icon dl-icon--apple" aria-hidden="true"><use href="#i-apple"/></svg>
         <svg class="dl-icon dl-icon--linux" aria-hidden="true"><use href="#i-terminal"/></svg>
-        <span data-download-label>Download for Windows</span>
+        <span data-download-label>Get Max for desktop</span>
       </a>
-      <a class="btn btn-ghost btn-lg" href="/download">Windows, macOS, Linux</a>
+      <a class="btn btn-ghost btn-lg" href="/download">View downloads</a>
     </div>
   </div>
 </section>
